@@ -250,7 +250,21 @@ footer p{color:var(--text2);font-size:.88rem;margin:.5rem 0}
 .whatsapp-float:hover{transform:scale(1.1)}
 .whatsapp-float svg{width:28px;height:28px;color:#fff}
 
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.revealed{opacity:1;transform:none}
+
+/* ===== HAMBURGER ACTIVE ===== */
+.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
 /* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .section-wrap{padding:5rem 1.5rem}
+  .inst-wrap{gap:3rem}
+  .booking-wrap{gap:2.5rem}
+}
 @media(max-width:900px){
   .loc-wrap,.inst-wrap,.booking-wrap{grid-template-columns:1fr}
   .inst-img-wrap{order:-1}
@@ -258,14 +272,62 @@ footer p{color:var(--text2);font-size:.88rem;margin:.5rem 0}
   .titem{grid-template-columns:70px 16px 1fr}
   .ttime{font-size:.65rem}
   .loc-float-card{left:.5rem;bottom:.5rem}
+  .loc-visual img{height:320px}
 }
 @media(max-width:768px){
-  .nav-links{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(13,16,40,.97);flex-direction:column;padding:2rem;gap:1.5rem;border-top:1px solid var(--border)}
-  [data-theme="light"] .nav-links{background:rgba(253,246,236,.97)}
+  :root{--nav-h:64px}
+  .nav-links{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(13,16,40,.97);flex-direction:column;padding:2rem;gap:1.5rem;border-top:1px solid var(--border);z-index:99}
+  [data-theme="light"] .nav-links{background:rgba(253,246,236,.98)}
   .nav-links.open{display:flex}
   .hamburger{display:flex}
   .vline{display:none}
   .stats-wrap{gap:0;flex-wrap:wrap}
-  .stat{min-width:50%;padding:1.5rem}
+  .stat{min-width:50%;padding:1.2rem 1rem}
+  .stat .num{font-size:2.2rem}
   .dropin-bar{flex-direction:column;text-align:center}
+  .section-wrap{padding:4rem 1.2rem}
+  #hero h1{font-size:clamp(2.2rem,9vw,3.5rem)}
+  .hero-content{padding:1.2rem}
+  .hero-sub{font-size:.95rem}
+  .trust-row span{font-size:.72rem;padding:.35rem .8rem}
+  .hero-btns{flex-direction:column;align-items:center}
+  .hero-btns a{width:100%;max-width:300px;text-align:center}
+  .quiz-cards{grid-template-columns:1fr}
+  .prog-grid{grid-template-columns:1fr}
+  .pcard.featured{margin-top:1.5rem}
+  .loc-wrap{gap:2rem}
+  .loc-visual{margin:0 -1.2rem}
+  .loc-visual img{border-radius:0;height:260px}
+  .loc-float-card{left:1rem;bottom:1rem}
+  .inst-img{width:220px;height:280px}
+  .inst-halo{width:240px;height:240px}
+  .inst-stats{gap:1.2rem}
+  .inst-stats strong{font-size:1.3rem}
+  .timeline::before{display:none}
+  .titem{grid-template-columns:auto 1fr;gap:0 1rem}
+  .ttime{font-size:.7rem;min-width:72px;text-align:left}
+  .tdot{display:none}
+  .rooms-grid{grid-template-columns:1fr}
+  .pgrid{grid-template-columns:1fr}
+  .prcard.best{margin-top:1.5rem}
+  .booking-wrap{gap:2rem}
+  .bform{padding:1.8rem 1.2rem}
+  .ptabs{gap:.6rem}
+  .ptab{padding:.5rem 1.2rem;font-size:.82rem}
+  .whatsapp-float{bottom:1.2rem;right:1.2rem;width:48px;height:48px}
+  .whatsapp-float svg{width:24px;height:24px}
+  .footer-links{gap:1.2rem}
+  h2{font-size:clamp(1.8rem,7vw,2.8rem)}
+}
+@media(max-width:480px){
+  .nav-inner{padding:0 1rem}
+  #navbar{padding:0 1rem}
+  .section-wrap{padding:3rem 1rem}
+  .stat{min-width:100%;border-bottom:1px solid var(--border)}
+  .ya-badges{flex-direction:column}
+  .dropin-bar{padding:1.2rem}
+  .prcard{padding:2rem 1.2rem}
+  .bform{padding:1.5rem 1rem}
+  .fg input,.fg select,.fg textarea{font-size:16px}
+  .scroll-hint{display:none}
 }

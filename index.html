@@ -46,11 +46,29 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg">
-    <div class="mandala m1"></div>
-    <div class="mandala m2"></div>
-    <div class="hero-glow"></div>
-    <img src="hero.png" alt="Himalayan Yoga" class="hero-bg-img"/>
+    <div class="hero-slider">
+      <div class="hero-slide active">
+        <video autoplay muted loop playsinline class="hero-video">
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-young-woman-doing-yoga-on-a-yoga-mat-in-nature-34346-large.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="hero-slide">
+        <video muted loop playsinline class="hero-video">
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-doing-yoga-on-a-mat-by-a-mountain-lake-34347-large.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="hero-slide">
+        <video muted loop playsinline class="hero-video">
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-yoga-in-the-sunrise-42616-large.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
     <div class="hero-overlay"></div>
+    <div class="hero-slider-nav">
+      <div class="slider-dot active" data-index="0"></div>
+      <div class="slider-dot" data-index="1"></div>
+      <div class="slider-dot" data-index="2"></div>
+    </div>
   </div>
   <div class="hero-content">
     <p class="eyebrow">Bhagsu · Dharamsala · Sacred Himalayas</p>

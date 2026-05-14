@@ -146,18 +146,40 @@ function switchPricing(plan, btn) {
 function submitForm(e) {
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
+  const form = document.getElementById('bookingForm');
+  
   btn.textContent = 'Sending…';
   btn.disabled = true;
 
-  setTimeout(() => {
-    btn.textContent = '✅ Enquiry Sent! We\'ll reply within 24 hrs.';
-    btn.style.background = 'linear-gradient(135deg,#4caf50,#2e7d32)';
-    document.getElementById('bookingForm').reset();
+  const formData = new FormData();
+  formData.append('name', document.getElementById('fname').value);
+  formData.append('email', document.getElementById('femail').value);
+  formData.append('phone', document.getElementById('fphone').value);
+  formData.append('program', document.getElementById('fprog').value);
+  formData.append('message', document.getElementById('fmsg').value);
 
+  fetch('contact.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      btn.textContent = '✅ Enquiry Sent! We\'ll reply within 24 hrs.';
+      btn.style.background = 'linear-gradient(135deg,#4caf50,#2e7d32)';
+      form.reset();
+    } else {
+      throw new Error('Network response was not ok.');
+    }
+  })
+  .catch(error => {
+    btn.textContent = '❌ Error sending. Please try again.';
+    btn.style.background = 'linear-gradient(135deg,#f44336,#d32f2f)';
+  })
+  .finally(() => {
     setTimeout(() => {
       btn.textContent = 'Send Enquiry & Reserve →';
       btn.style.background = '';
       btn.disabled = false;
-    }, 4000);
-  }, 1200);
+    }, 5000);
+  });
 }

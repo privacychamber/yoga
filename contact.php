@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = strip_tags(trim($_POST["message"]));
 
     // DESTINATION EMAIL
-    $recipient = "shivam@shivamneelkantyoga.com";
+    $recipient = "weareonetechnation@gmail.com";
     $subject = "New Journey Enquiry from $name - HimYog";
 
     $email_content = "Name: $name\n";

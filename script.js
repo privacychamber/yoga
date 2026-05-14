@@ -1,3 +1,12 @@
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log('SW Registered'))
+      .catch(err => console.log('SW Error', err));
+  });
+}
+
 /* ===== THEME TOGGLE ===== */
 const html = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
@@ -232,4 +241,36 @@ sliderDots.forEach(dot => {
 if(heroSlides.length > 0) {
   startSlider();
 }
+
+/* ===== MOBILE APP OPTIMIZATIONS ===== */
+// Close menu on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('active');
+  });
+});
+
+// Scroll Spy for Bottom Nav
+const mbItems = document.querySelectorAll('.mb-item');
+const sections = document.querySelectorAll('section');
+
+window.addEventListener('scroll', () => {
+  let current = "";
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (pageYOffset >= (sectionTop - 200)) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  mbItems.forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('href').includes(current)) {
+      item.classList.add('active');
+    }
+  });
+});
+
 

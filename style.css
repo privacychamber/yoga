@@ -294,7 +294,7 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, var(--bg) 95%);
+  background: linear-gradient(to bottom, rgba(8, 10, 18, 0.4) 0%, rgba(8, 10, 18, 0.8) 100%);
   z-index: 1;
 }
 
@@ -303,6 +303,7 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
   z-index: 2;
   text-align: center;
   max-width: 1000px;
+  color: #FFFFFF; /* Force white for hero content */
 }
 .eyebrow {
   font-family: 'Cinzel', serif;
@@ -313,6 +314,7 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
   margin-bottom: 2rem;
   display: inline-block;
   position: relative;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 .eyebrow::after {
   content: '';
@@ -330,7 +332,7 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
   font-weight: 300;
   line-height: 1.05;
   margin-bottom: 2rem;
-  color: var(--text-main);
+  color: #FFFFFF; /* Forced white for hero */
 }
 #hero h1 em {
   font-style: italic;
@@ -338,7 +340,7 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
 }
 .hero-sub {
   font-size: clamp(1.1rem, 2vw, 1.3rem);
-  color: var(--text-dim);
+  color: rgba(255, 255, 255, 0.9); /* Forced white/dimmed for hero */
   max-width: 700px;
   margin: 0 auto 3rem;
   line-height: 1.8;
@@ -351,13 +353,13 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
   margin-bottom: 3.5rem;
 }
 .trust-row span {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   border-radius: var(--radius-full);
   padding: 0.5rem 1.2rem;
   font-size: 0.85rem;
-  color: var(--gold);
+  color: #FFFFFF; /* Forced white for hero */
   font-family: 'Cinzel', serif;
 }
 

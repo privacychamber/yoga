@@ -193,54 +193,7 @@ function submitForm(e) {
   });
 }
 
-/* ===== HERO SLIDER LOGIC ===== */
-const heroSlides = document.querySelectorAll('.hero-slide');
-const sliderDots = document.querySelectorAll('.slider-dot');
-let currentSlide = 0;
-let sliderInterval;
 
-function showSlide(index) {
-  heroSlides.forEach(s => s.classList.remove('active'));
-  sliderDots.forEach(d => d.classList.remove('active'));
-  
-  heroSlides[index].classList.add('active');
-  sliderDots[index].classList.add('active');
-  
-  // Pause all videos, play current
-  document.querySelectorAll('.hero-video').forEach((v, i) => {
-    if(i === index) v.play();
-    else v.pause();
-  });
-  
-  currentSlide = index;
-}
-
-function nextSlide() {
-  let next = (currentSlide + 1) % heroSlides.length;
-  showSlide(next);
-}
-
-function startSlider() {
-  stopSlider();
-  sliderInterval = setInterval(nextSlide, 8000); // 8 seconds per slide
-}
-
-function stopSlider() {
-  if(sliderInterval) clearInterval(sliderInterval);
-}
-
-sliderDots.forEach(dot => {
-  dot.addEventListener('click', () => {
-    const index = parseInt(dot.getAttribute('data-index'));
-    showSlide(index);
-    startSlider(); // Reset timer on manual click
-  });
-});
-
-// Initialize
-if(heroSlides.length > 0) {
-  startSlider();
-}
 
 /* ===== MOBILE APP OPTIMIZATIONS ===== */
 // Close menu on link click

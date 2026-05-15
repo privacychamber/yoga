@@ -250,46 +250,17 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
   filter: grayscale(1) contrast(1.2);
 }
 
-/* VIDEO SLIDER */
-.hero-slider {
+.hero-video-banner {
   position: absolute;
   inset: 0;
   z-index: 0;
-}
-.hero-slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
-}
-.hero-slide.active {
-  opacity: 1;
 }
 .hero-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.hero-slider-nav {
-  position: absolute;
-  bottom: 3rem;
-  right: 5%;
-  display: flex;
-  gap: 1rem;
-  z-index: 10;
-}
-.slider-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid var(--gold);
-  cursor: pointer;
-  transition: var(--transition);
-}
-.slider-dot.active {
-  background: var(--gold);
-  transform: scale(1.2);
-}
+
 
 .hero-overlay {
   position: absolute;

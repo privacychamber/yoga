@@ -294,8 +294,13 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(8, 10, 18, 0.4) 0%, rgba(8, 10, 18, 0.8) 100%);
+  background: linear-gradient(to bottom, rgba(8, 10, 18, 0.5) 0%, rgba(8, 10, 18, 0.8) 100%);
   z-index: 1;
+  transition: var(--transition);
+}
+
+[data-theme="light"] .hero-overlay {
+  background: transparent;
 }
 
 .hero-content {
@@ -303,7 +308,10 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
   z-index: 2;
   text-align: center;
   max-width: 1000px;
-  color: #FFFFFF; /* Force white for hero content */
+  color: var(--text-main);
+}
+[data-theme="dark"] .hero-content {
+  color: #FFFFFF;
 }
 .eyebrow {
   font-family: 'Cinzel', serif;
@@ -332,7 +340,10 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
   font-weight: 300;
   line-height: 1.05;
   margin-bottom: 2rem;
-  color: #FFFFFF; /* Forced white for hero */
+  color: var(--text-main);
+}
+[data-theme="dark"] #hero h1 {
+  color: #FFFFFF;
 }
 #hero h1 em {
   font-style: italic;
@@ -340,10 +351,13 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
 }
 .hero-sub {
   font-size: clamp(1.1rem, 2vw, 1.3rem);
-  color: rgba(255, 255, 255, 0.9); /* Forced white/dimmed for hero */
+  color: var(--text-dim);
   max-width: 700px;
   margin: 0 auto 3rem;
   line-height: 1.8;
+}
+[data-theme="dark"] .hero-sub {
+  color: rgba(255, 255, 255, 0.9);
 }
 .trust-row {
   display: flex;
@@ -353,14 +367,19 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
   margin-bottom: 3.5rem;
 }
 .trust-row span {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
   backdrop-filter: blur(10px);
   border-radius: var(--radius-full);
   padding: 0.5rem 1.2rem;
   font-size: 0.85rem;
-  color: #FFFFFF; /* Forced white for hero */
+  color: var(--text-main);
   font-family: 'Cinzel', serif;
+}
+[data-theme="dark"] .trust-row span {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .hero-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}

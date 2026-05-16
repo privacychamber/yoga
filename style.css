@@ -1008,6 +1008,7 @@ h2 em {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  z-index: 10;
 }
 .prcard h4 {
   font-size: 1.8rem;

@@ -227,7 +227,7 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 20px 80px;
+  padding: 140px 20px 80px;
   overflow: hidden;
   background: var(--bg);
 }
@@ -312,11 +312,16 @@ h1, h2, h3, h4, .cinzel { font-family: 'Cinzel', serif; }
 }
 #hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
   font-weight: 300;
-  line-height: 1.05;
+  line-height: 1.25;
   margin-bottom: 2rem;
   color: var(--text-main);
+}
+#hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+  display: block;
 }
 [data-theme="dark"] #hero h1 {
   color: #FFFFFF;
@@ -437,7 +442,7 @@ h2 em {
 }
 .stat .num {
   font-family: 'Cinzel', serif;
-  font-size: clamp(3rem, 5vw, 4rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   color: var(--gold);
   line-height: 1;
   font-weight: 600;
@@ -1443,20 +1448,4 @@ footer p {
   .policy-wrap { padding: 40px 20px; }
 }
 
-/* LOGO */
-.logo-img {
-  height: 50px;
-  width: auto;
-  transition: transform 0.3s ease;
-  filter: brightness(1.1);
-}
-.footer-logo {
-  height: 80px;
-  margin-bottom: 0.5rem;
-}
-.nav-logo:hover .logo-img {
-  transform: scale(1.05);
-}
-@media (max-width: 768px) {
-  .logo-img { height: 40px; }
-}
+/* Removed logo-img styles */

@@ -1442,3 +1442,21 @@ footer p {
   .policy-hero { padding: 100px 20px 60px; }
   .policy-wrap { padding: 40px 20px; }
 }
+
+/* LOGO */
+.logo-img {
+  height: 50px;
+  width: auto;
+  transition: transform 0.3s ease;
+  filter: brightness(1.1);
+}
+.footer-logo {
+  height: 80px;
+  margin-bottom: 0.5rem;
+}
+.nav-logo:hover .logo-img {
+  transform: scale(1.05);
+}
+@media (max-width: 768px) {
+  .logo-img { height: 40px; }
+}

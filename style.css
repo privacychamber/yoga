@@ -988,6 +988,7 @@ h2 em {
   border-radius: var(--radius-lg);
   text-align: center;
   transition: var(--transition);
+  position: relative;
 }
 .prcard.best {
   border-color: var(--gold);

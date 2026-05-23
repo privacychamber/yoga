@@ -105,23 +105,128 @@ document.querySelectorAll('.pcard, .qcard, .rcard, .prcard, .fitem, .titem, .lf,
   revealObserver.observe(el);
 });
 
+/* ===== HERO SLIDESHOW ===== */
+let currentSlide = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('#sliderPagination .dot');
+let slideInterval = setInterval(nextSlide, 5000);
+
+function showSlide(index) {
+  if (!slides.length) return;
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === index);
+  });
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+function setSlide(index) {
+  currentSlide = index;
+  showSlide(currentSlide);
+  clearInterval(slideInterval);
+  slideInterval = setInterval(nextSlide, 5000);
+}
+
+/* ===== DISCOVERY FORM BATCH OPTIONS ===== */
+const batches200 = [
+  "1st – 24th March 2026",
+  "1st – 24th April 2026",
+  "1st – 24th May 2026",
+  "1st – 24th June 2026",
+  "1st – 24th July 2026",
+  "1st – 24th September 2026",
+  "1st – 24th October 2026"
+];
+
+const batches300 = [
+  "1st May – 4th June 2026",
+  "8th June – 12th July 2026",
+  "21st Sept – 25th Oct 2026"
+];
+
+function updateDiscoveryBatches() {
+  const progSelect = document.getElementById('dprog');
+  const batchSelect = document.getElementById('dbatch');
+  if (!progSelect || !batchSelect) return;
+  
+  const selectedProg = progSelect.value;
+  batchSelect.innerHTML = '';
+  
+  const list = selectedProg.includes('200-Hour') ? batches200 : batches300;
+  list.forEach(batch => {
+    const opt = document.createElement('option');
+    opt.value = batch;
+    opt.textContent = batch;
+    batchSelect.appendChild(opt);
+  });
+}
+
+// Initial populate of batches on load
+document.addEventListener('DOMContentLoaded', () => {
+  updateDiscoveryBatches();
+});
+
+/* ===== SUBMIT DISCOVERY FORM ===== */
+function submitDiscoveryForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('dsubmitBtn');
+  const msg = document.getElementById('discoveryMsg');
+  const form = document.getElementById('discoveryForm');
+  
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  msg.className = 'discovery-message hidden';
+  msg.textContent = '';
+  
+  const contactVal = document.getElementById('dcontact').value;
+  const isEmail = contactVal.includes('@');
+  
+  const formData = new FormData();
+  formData.append('name', document.getElementById('dname').value);
+  formData.append('email', isEmail ? contactVal : 'no-email-provided@himyog.com');
+  formData.append('phone', isEmail ? '' : contactVal);
+  formData.append('program', document.getElementById('dprog').value);
+  formData.append('message', 'Inquiry from Hero Banner Discovery Form.\nPreferred Batch: ' + document.getElementById('dbatch').value + '\nContact Info: ' + contactVal);
+  
+  fetch('contact.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      msg.textContent = '✅ Journey started! We will reach out on WhatsApp/Email within 24 hours.';
+      msg.className = 'discovery-message success';
+      form.reset();
+      updateDiscoveryBatches(); // Reset options
+    } else {
+      throw new Error('Server response error');
+    }
+  })
+  .catch(err => {
+    msg.textContent = '❌ Error submitting. Please try again or WhatsApp us.';
+    msg.className = 'discovery-message error';
+  })
+  .finally(() => {
+    btn.textContent = 'Begin Journey →';
+    btn.disabled = false;
+  });
+}
+
 /* ===== QUIZ ===== */
 const quizResults = {
-  online: {
-    title: '✨ Online Classes Are Your Starting Point',
-    desc: 'Begin your yoga journey from wherever you are. Build a solid foundation with live-streamed and recorded sessions with Yogi Shivam.'
+  '200h': {
+    title: '🎓 The 200-Hour Foundational YTTC is for You',
+    desc: 'Launch your teaching career or deepen your personal practice with our Yoga Alliance RYS 200 certification. Includes full lodging, meals, and yogic studies under Yogi Shivam.'
   },
-  hybrid: {
-    title: '📅 The Hybrid Program Suits You Perfectly',
-    desc: 'Flexible online learning combined with weekend immersions — the ideal path for busy professionals ready to deepen their practice.'
-  },
-  '7day': {
-    title: '🏔️ The 7-Day Lifestyle Retreat Awaits You',
-    desc: 'A short but deeply transformative week in the sacred Himalayas. Reset, heal, and reconnect with your inner self.'
-  },
-  yttc: {
-    title: '🎓 You Are Ready for the 200-Hour YTTC',
-    desc: 'Launch your yoga teaching career with a globally recognized Yoga Alliance certification. This is where your real journey begins.'
+  '300h': {
+    title: '🏔️ The 300-Hour Advanced YTTC Awaits You',
+    desc: 'Deepen your existing 200-Hour foundation with advanced asana sequencing, Shatkarmas, pranayama, and spiritual philosophy under Yogi Shivam.'
   }
 };
 

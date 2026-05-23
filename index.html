@@ -53,30 +53,77 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg">
-    <div class="hero-video-banner">
-      <video autoplay muted loop playsinline class="hero-video">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-young-woman-doing-yoga-on-a-yoga-mat-in-nature-34346-large.mp4" type="video/mp4">
-      </video>
+    <div class="hero-slider" id="heroSlider">
+      <div class="hero-slide active" style="background-image: url('slide1.png')"></div>
+      <div class="hero-slide" style="background-image: url('slide2.png')"></div>
+      <div class="hero-slide" style="background-image: url('slide3.png')"></div>
+      <div class="hero-slide" style="background-image: url('slide4.png')"></div>
     </div>
     <div class="hero-overlay"></div>
-
   </div>
   <div class="hero-content">
-    <p class="eyebrow">Bhagsu · Dharamsala · Sacred Himalayas</p>
-    <h1>Awaken Your Purpose<br/><em>in the Mountains</em><br/>of Dharamsala</h1>
-    <p class="hero-sub">Not just a certificate — a complete spiritual &amp; career transformation.<br/>Train where ancient Himalayan wisdom still lives.</p>
-    <div class="trust-row">
-      <span>🏅 Yoga Alliance RYS 200</span>
-      <span>🏅 Yoga Alliance RYS 300</span>
-      <span>👥 Only 12 Students/Batch</span>
-      <span>🌍 30+ Countries</span>
+    <p class="eyebrow">— SACRED HIMALAYAS · DHARAMSHALA —</p>
+    <h1>Awaken Your Purpose<br/><em class="cormorant-cursive">In the Sacred Mountains.</em></h1>
+    <p class="hero-sub">Yoga Alliance certified RYS 200 &amp; 300 teacher training under the guidance of Yogi Shivam. Train where ancient Himalayan wisdom still lives.</p>
+    
+    <!-- DISCOVERY FORM -->
+    <form class="discovery-bar-form" id="discoveryForm" onsubmit="submitDiscoveryForm(event)">
+      <div class="discovery-bar">
+        <div class="discovery-field">
+          <label for="dprog">Course</label>
+          <select id="dprog" onchange="updateDiscoveryBatches()" required>
+            <option value="200-Hour YTTC (24 Days)">200-Hour YTTC</option>
+            <option value="300-Hour YTTC (35 Days)">300-Hour YTTC</option>
+          </select>
+        </div>
+        <div class="discovery-separator"></div>
+        <div class="discovery-field">
+          <label for="dbatch">Preferred Batch</label>
+          <select id="dbatch" required>
+            <!-- Will be dynamically populated in script.js -->
+          </select>
+        </div>
+        <div class="discovery-separator"></div>
+        <div class="discovery-field">
+          <label for="dname">Full Name</label>
+          <input type="text" id="dname" placeholder="Your name" required/>
+        </div>
+        <div class="discovery-separator"></div>
+        <div class="discovery-field">
+          <label for="dcontact">WhatsApp / Email</label>
+          <input type="text" id="dcontact" placeholder="Phone or Email" required/>
+        </div>
+        <button type="submit" class="btn-discovery" id="dsubmitBtn">Begin Journey →</button>
+      </div>
+      <div class="discovery-message hidden" id="discoveryMsg"></div>
+    </form>
+
+    <!-- PILL BUTTONS -->
+    <div class="hero-btns-pills">
+      <a href="#programs" class="btn-pill primary">🎓 Explore Courses</a>
+      <a href="#accommodation" class="btn-pill outline">🏡 Rooms &amp; Cottage</a>
+      <a href="https://wa.me/919816565169" target="_blank" class="btn-pill outline">💬 WhatsApp Us</a>
     </div>
-    <div class="hero-btns">
-      <a href="#booking" class="btn-primary">Apply For Your Journey →</a>
-      <a href="#programs" class="btn-ghost">Explore Programs</a>
+
+    <!-- TRUST LINE -->
+    <div class="hero-trust-line">
+      <span>★ 4.9/5 Yoga Alliance Rating</span>
+      <span class="dot-separator">|</span>
+      <span>5,000+ Alumni Worldwide</span>
+      <span class="dot-separator">|</span>
+      <span>Max 12 Students/Batch</span>
+      <span class="dot-separator">|</span>
+      <span>24/7 Spiritual Guidance</span>
     </div>
   </div>
 
+  <!-- SLIDER DOTS -->
+  <div class="slider-pagination" id="sliderPagination">
+    <span class="dot active" onclick="setSlide(0)"></span>
+    <span class="dot" onclick="setSlide(1)"></span>
+    <span class="dot" onclick="setSlide(2)"></span>
+    <span class="dot" onclick="setSlide(3)"></span>
+  </div>
 </section>
 
 <!-- STATS -->
@@ -97,34 +144,22 @@
   <div class="section-wrap">
     <p class="eyebrow">Find Your Path</p>
     <h2>Which Journey<br/><em>Is Calling You?</em></h2>
-    <p class="section-sub">Answer honestly — we'll guide you to exactly the right experience.</p>
-    <div class="quiz-cards">
-      <div class="qcard" onclick="selectQuiz(this,'online')">
-        <div class="qicon">📱</div>
-        <h3>I'm Seeking Healing &amp; Balance</h3>
-        <p>Start at home with guided online classes. Build your foundation gently.</p>
-        <span class="qtag">Online Classes</span>
+    <p class="section-sub">Choose your current level — we will guide you to exactly the right certification.</p>
+    <div class="quiz-cards" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 800px; margin: 4rem auto 0;">
+      <div class="qcard" onclick="selectQuiz(this,'200h')">
+        <div class="qicon">🌟</div>
+        <h3>I Want to Begin Teaching &amp; Build my Foundation</h3>
+        <p>Perfect for beginners &amp; intermediate students. Get certified to teach globally with a comprehensive multi-style curriculum under Yogi Shivam.</p>
+        <span class="qtag">RYS 200-Hour YTTC</span>
       </div>
-      <div class="qcard" onclick="selectQuiz(this,'hybrid')">
-        <div class="qicon">📅</div>
-        <h3>I Want Flexibility</h3>
-        <p>Online learning with weekend immersions — ideal for working professionals.</p>
-        <span class="qtag">Hybrid Program</span>
-      </div>
-      <div class="qcard" onclick="selectQuiz(this,'7day')">
+      <div class="qcard" onclick="selectQuiz(this,'300h')">
         <div class="qicon">🏔️</div>
-        <h3>I Need a Deep Retreat</h3>
-        <p>7 days in the Himalayas. A short but profound immersion into stillness.</p>
-        <span class="qtag">7-Day Lifestyle Retreat</span>
-      </div>
-      <div class="qcard" onclick="selectQuiz(this,'yttc')">
-        <div class="qicon">🎓</div>
-        <h3>I'm Ready to Teach &amp; Earn</h3>
-        <p>A globally recognized certification. Launch your yoga career from the Himalayas.</p>
-        <span class="qtag">200H / 300H YTTC</span>
+        <h3>I Am a Teacher Seeking Advanced Mastery</h3>
+        <p>Requires an existing 200-Hour certification. Deepen your understanding of advanced asanas, pranayamas, kriyas, philosophy, and alignment.</p>
+        <span class="qtag">RYS 300-Hour Advanced YTTC</span>
       </div>
     </div>
-    <div id="quiz-result" class="quiz-result hidden"></div>
+    <div id="quiz-result" class="quiz-result hidden" style="max-width: 800px; margin: 3rem auto 0;"></div>
   </div>
 </section>
 
@@ -139,7 +174,7 @@
         <div class="lf"><span>⛰️</span><div><h4>Bhagsu, Upper Dharamsala</h4><p>Sacred land of His Holiness The Dalai Lama. The Dhauladhar peaks stand as silent witnesses to your transformation.</p></div></div>
         <div class="lf"><span>🏡</span><div><h4>Only 12 Guests — Always Intimate</h4><p>Handcrafted wooden rooms with local Himalayan design. Village charm, cozy comfort, natural vistas in every direction.</p></div></div>
         <div class="lf"><span>🌿</span><div><h4>Ayurvedic Nourishment</h4><p>Daily home-style Indian vegetarian meals and specific Ayurvedic healing foods prepared with love.</p></div></div>
-        <div class="lf"><span>🌊</span><div><h4>Winter Retreats in Goa</h4><p>When the Himalayas turn cold, our community migrates to Goa — a perfect reunion for alumni.</p></div></div>
+        <div class="lf"><span>🚕</span><div><h4>Stress-free Travel Arrangement</h4><p>We can arrange pre-paid taxi bookings for arrivals and departures at an extra charge. Just message us.</p></div></div>
       </div>
     </div>
     <div class="loc-visual">
@@ -154,56 +189,42 @@
   <div class="section-wrap">
     <p class="eyebrow">Our Programs</p>
     <h2>Choose Your<br/><em>Transformation</em></h2>
-    <div class="prog-grid">
-      <div class="pcard">
-        <span class="pdur">7 Days · 100 Hours</span>
-        <h3>Lifestyle Retreat</h3>
-        <p class="ptagline">A yoga holiday in the hills of Dharamsala</p>
-        <ul>
-          <li>✦ Hatha &amp; Pranayama</li>
-          <li>✦ Guided Himalayan meditation</li>
-          <li>✦ Ayurvedic lifestyle</li>
-          <li>✦ All meals included</li>
-          <li>✦ Certificate of completion</li>
-        </ul>
-        <a href="#pricing" class="btn-primary sm">View Pricing →</a>
-      </div>
+    <div class="prog-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); max-width: 1000px; margin: 4rem auto;">
       <div class="pcard featured">
-        <div class="pbadge">Most Popular</div>
-        <span class="pdur">25 Days · 200 Hours</span>
+        <div class="pbadge">Certified</div>
+        <span class="pdur">24 Days · 200 Hours</span>
         <h3>Foundational YTTC</h3>
         <p class="ptagline">Yoga Alliance RYS 200 Certified</p>
         <ul>
-          <li>✦ Hatha &amp; Ashtanga asanas</li>
-          <li>✦ Alignment &amp; adjustments</li>
-          <li>✦ Anatomy &amp; physiology</li>
-          <li>✦ Patanjali's Yoga Sutras</li>
-          <li>✦ Bhagavad Gita philosophy</li>
-          <li>✦ Teaching methodology</li>
-          <li>✦ Pranayama &amp; meditation</li>
-          <li>✦ All meals &amp; accommodation</li>
+          <li>✦ Traditional Hatha &amp; Ashtanga practice</li>
+          <li>✦ Alignment, corrections &amp; hands-on adjustments</li>
+          <li>✦ Patanjali's Yoga Sutras &amp; Bhagavad Gita</li>
+          <li>✦ Anatomy &amp; physiology of yogic life</li>
+          <li>✦ Pranayama, Kriya practices &amp; Meditation</li>
+          <li>✦ Practical teaching methodology &amp; sequencing</li>
+          <li>✦ Handcrafted local wooden room accommodation</li>
+          <li>✦ Homely Indian vegetarian meals</li>
         </ul>
-        <a href="#pricing" class="btn-primary sm">View Pricing →</a>
+        <a href="#pricing" class="btn-primary sm">View Pricing &amp; Batches →</a>
       </div>
-      <div class="pcard">
-        <span class="pdur">40 Days · 300 Hours</span>
+      <div class="pcard featured">
+        <div class="pbadge">Advanced</div>
+        <span class="pdur">35 Days · 300 Hours</span>
         <h3>Advanced YTTC</h3>
         <p class="ptagline">Yoga Alliance RYS 300 Certified</p>
-        <p class="prereq">Requires existing 200-hr certificate</p>
+        <p class="prereq" style="font-family:'Cinzel',serif; font-size:0.8rem; color:var(--gold); margin-bottom:1.5rem;">Requires existing 200-hr certificate</p>
         <ul>
-          <li>✦ Advanced asana sequences</li>
-          <li>✦ Kriyas &amp; Shatkarmas</li>
-          <li>✦ Yoga Nidra</li>
-          <li>✦ Advanced pranayama</li>
-          <li>✦ Spiritual mastery practices</li>
-          <li>✦ All meals &amp; accommodation</li>
+          <li>✦ Advanced asanas &amp; sequencing methodologies</li>
+          <li>✦ Shatkarmas, Kriyas &amp; deep cleansing techniques</li>
+          <li>✦ Yoga Nidra &amp; advanced meditation practices</li>
+          <li>✦ Advanced Pranayama &amp; breath-work mastery</li>
+          <li>✦ Deep theoretical study of yogic philosophy</li>
+          <li>✦ Posture adjustment, healing &amp; alignments</li>
+          <li>✦ Handcrafted local wooden room accommodation</li>
+          <li>✦ Homely Indian vegetarian meals</li>
         </ul>
-        <a href="#pricing" class="btn-primary sm">View Pricing →</a>
+        <a href="#pricing" class="btn-primary sm">View Pricing &amp; Batches →</a>
       </div>
-    </div>
-    <div class="dropin-bar">
-      <div><h4>Not Ready for Full Retreat?</h4><p>Daily drop-in classes — Hatha, Ashtanga, Pranayama, Meditation, Sound Healing &amp; Ayurveda.</p></div>
-      <a href="#booking" class="btn-ghost sm">Book a Drop-In →</a>
     </div>
   </div>
 </section>
@@ -300,13 +321,13 @@
       <div class="prcard">
         <h4>Air / Sun / Moon Room</h4><small>Single Occupancy</small>
         <div class="orig">$2,690</div><div class="disc">$1,748.50 <span>Early Bird</span></div>
-        <ul><li>✦ 40 days accommodation</li><li>✦ All Ayurvedic meals</li><li>✦ Full 300-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Advanced materials</li></ul>
+        <ul><li>✦ 35 days accommodation</li><li>✦ All homely veg meals</li><li>✦ Full 300-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Advanced materials</li></ul>
         <a href="#booking" class="btn-primary">Reserve with $250 →</a>
       </div>
       <div class="prcard best">
         <h4>Star Cottage</h4><small>2–3 People</small>
         <div class="orig">$4,815</div><div class="disc">$3,129.75 <span>Early Bird</span></div>
-        <ul><li>✦ 40 days private cottage</li><li>✦ All Ayurvedic meals</li><li>✦ Full 300-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Advanced materials</li><li>✦ Private sit-out area</li></ul>
+        <ul><li>✦ 35 days private cottage</li><li>✦ All homely veg meals</li><li>✦ Full 300-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Advanced materials</li><li>✦ Private sit-out area</li></ul>
         <a href="#booking" class="btn-primary">Reserve with $250 →</a>
       </div>
     </div>
@@ -341,7 +362,7 @@
       </div>
       <div class="fitem" onclick="toggleFaq(this)">
         <div class="fq">What about food and dietary needs? <span>+</span></div>
-        <div class="fa">All meals are included — daily Indian home-style vegetarian food and specific Ayurvedic healing foods. We accommodate common dietary needs with advance notice.</div>
+        <div class="fa">All meals are included — daily Indian home-style vegetarian food. We accommodate common dietary needs with advance notice.</div>
       </div>
     </div>
   </div>
@@ -357,7 +378,7 @@
         <div class="bpoint"><span>💳</span><div><h4>Only $250 Deposit via PayPal</h4><p>Non-refundable but fully date-transferable. Zero risk to your plans.</p></div></div>
         <div class="bpoint"><span>🚕</span><div><h4>Stress-Free Airport Transfers</h4><p>Pre-book your taxi from Dharamsala/Gaggal Airport. We handle logistics.</p></div></div>
         <div class="bpoint"><span>📅</span><div><h4>Flexible Date Transfer</h4><p>Plans change. Your deposit moves to any future batch, no questions asked.</p></div></div>
-        <div class="bpoint"><span>❄️</span><div><h4>Winter Retreats in Goa</h4><p>When the mountains turn cold, join our coastal winter retreat in Goa.</p></div></div>
+        <div class="bpoint"><span>🕉️</span><div><h4>Yoga Alliance Certified</h4><p>Graduate with a globally recognized RYT 200 or RYT 300 credential.</p></div></div>
       </div>
       <form class="bform" id="bookingForm" onsubmit="submitForm(event)">
         <h3>Begin Your Journey</h3>
@@ -365,13 +386,10 @@
         <div class="fg"><label>Email Address</label><input type="email" id="femail" placeholder="your@email.com" required/></div>
         <div class="fg"><label>WhatsApp Number</label><input type="tel" id="fphone" placeholder="+1 234 567 8900"/></div>
         <div class="fg"><label>Program of Interest</label>
-          <select id="fprog">
+          <select id="fprog" required>
             <option value="">Select a program</option>
-            <option>7-Day Lifestyle Retreat</option>
-            <option>200-Hour YTTC (25 Days)</option>
-            <option>300-Hour YTTC (40 Days)</option>
-            <option>Daily Drop-In Classes</option>
-            <option>Online / Hybrid Course</option>
+            <option value="200-Hour YTTC (24 Days)">RYS 200-Hour YTTC (24 Days)</option>
+            <option value="300-Hour YTTC (35 Days)">RYS 300-Hour YTTC (35 Days)</option>
           </select>
         </div>
         <div class="fg"><label>Tell us about yourself</label><textarea rows="3" id="fmsg" placeholder="Your yoga background, goals, preferred dates..."></textarea></div>

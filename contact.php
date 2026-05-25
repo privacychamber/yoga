@@ -6,8 +6,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $program = strip_tags(trim($_POST["program"]));
     $message = strip_tags(trim($_POST["message"]));
 
+    // Load config settings dynamically
+    $config_file = 'admin_config_9418.json';
+    $config = array(
+        'admin_email' => 'privacy.chamber@gmail.com',
+        'send_client_conf' => true
+    );
+    if (file_exists($config_file)) {
+        $json_data = json_decode(file_get_contents($config_file), true);
+        if ($json_data) {
+            $config = array_merge($config, $json_data);
+        }
+    }
+
     // DESTINATION EMAIL
-    $recipient = "privacy.chamber@gmail.com";
+    $recipient = $config['admin_email'];
     $subject = "New Journey Enquiry from $name - HimYog";
 
     $email_content = "Name: $name\n";
@@ -32,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             fclose($fp);
         }
 
-        // Send confirmation email to client if a valid email was provided
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) && $email !== "no-email-provided@himyog.com") {
+        // Send confirmation email to client if enabled and a valid email was provided
+        if ($config['send_client_conf'] && filter_var($email, FILTER_VALIDATE_EMAIL) && $email !== "no-email-provided@himyog.com") {
             $client_subject = "Enquiry Received - HimYog Yoga Kendra";
             
             $client_content = "ॐ Namaste $name,\n\n";

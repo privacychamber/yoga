@@ -8,8 +8,12 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Block public access to CSV backups
+# Block public access to CSV backups and JSON configs
 <Files "enquiries_backup_9418.csv">
+  Order Allow,Deny
+  Deny from all
+</Files>
+<Files "admin_config_9418.json">
   Order Allow,Deny
   Deny from all
 </Files>

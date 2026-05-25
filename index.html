@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=5"/>
+<link rel="stylesheet" href="style.css?v=6"/>
 <link rel="manifest" href="manifest.json"/>
 <meta name="theme-color" content="#080A12"/>
 <link rel="apple-touch-icon" href="favicon.svg"/>
@@ -307,14 +307,14 @@
         <h4>Air / Sun / Moon Room</h4><small>Single Occupancy</small>
         <div class="orig">$1,900</div><div class="disc">$1,235 <span>Early Bird</span></div>
         <ul><li>✦ 25 days accommodation</li><li>✦ All Ayurvedic meals</li><li>✦ Full 200-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Course materials</li></ul>
-        <a href="#booking" class="btn-primary">Reserve with $250 →</a>
+        <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', 'Air / Sun / Moon Room')" class="btn-primary">Reserve Spot →</a>
       </div>
       <div class="prcard best">
         <div class="bestbadge">Best Value</div>
         <h4>Star Cottage</h4><small>2–3 People</small>
         <div class="orig">$3,400</div><div class="disc">$2,210 <span>Early Bird</span></div>
         <ul><li>✦ 25 days private cottage</li><li>✦ All Ayurvedic meals</li><li>✦ Full 200-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Course materials</li><li>✦ Private sit-out area</li></ul>
-        <a href="#booking" class="btn-primary">Reserve with $250 →</a>
+        <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', 'Star Cottage')" class="btn-primary">Reserve Spot →</a>
       </div>
     </div>
     <div class="pgrid hidden" id="p300">
@@ -322,13 +322,13 @@
         <h4>Air / Sun / Moon Room</h4><small>Single Occupancy</small>
         <div class="orig">$2,690</div><div class="disc">$1,748.50 <span>Early Bird</span></div>
         <ul><li>✦ 35 days accommodation</li><li>✦ All homely veg meals</li><li>✦ Full 300-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Advanced materials</li></ul>
-        <a href="#booking" class="btn-primary">Reserve with $250 →</a>
+        <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', 'Air / Sun / Moon Room')" class="btn-primary">Reserve Spot →</a>
       </div>
       <div class="prcard best">
         <h4>Star Cottage</h4><small>2–3 People</small>
         <div class="orig">$4,815</div><div class="disc">$3,129.75 <span>Early Bird</span></div>
         <ul><li>✦ 35 days private cottage</li><li>✦ All homely veg meals</li><li>✦ Full 300-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Advanced materials</li><li>✦ Private sit-out area</li></ul>
-        <a href="#booking" class="btn-primary">Reserve with $250 →</a>
+        <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', 'Star Cottage')" class="btn-primary">Reserve Spot →</a>
       </div>
     </div>
   </div>
@@ -450,6 +450,29 @@
   </a>
 </nav>
 
-<script src="script.js?v=5"></script>
+<!-- ENQUIRY MODAL POPUP -->
+<div id="enquiryModal" class="modal-overlay hidden">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeEnquiryModal()">&times;</button>
+    <h3 id="modalTitle">Reserve Your Spot</h3>
+    <p id="modalSub" class="modal-sub">RYS 200-Hour YTTC · Star Cottage</p>
+    <form id="modalForm" onsubmit="submitModalEnquiry(event)">
+      <input type="hidden" id="modalProg"/>
+      <input type="hidden" id="modalRoom"/>
+      <div class="fg">
+        <label>Full Name</label>
+        <input type="text" id="modalName" placeholder="Your full name" required />
+      </div>
+      <div class="fg">
+        <label>WhatsApp / Email</label>
+        <input type="text" id="modalContact" placeholder="Phone number or email" required />
+      </div>
+      <button type="submit" class="btn-primary full" id="modalSubmitBtn">Send Reservation Request →</button>
+    </form>
+    <div id="modalMsg" class="discovery-message hidden"></div>
+  </div>
+</div>
+
+<script src="script.js?v=6"></script>
 </body>
 </html>

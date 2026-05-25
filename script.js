@@ -331,4 +331,110 @@ window.addEventListener('scroll', () => {
   });
 });
 
+/* ===== ENQUIRY MODAL POPUP ===== */
+function openEnquiryModal(program, room) {
+  const modal = document.getElementById('enquiryModal');
+  const title = document.getElementById('modalTitle');
+  const sub = document.getElementById('modalSub');
+  const modalProgInput = document.getElementById('modalProg');
+  const modalRoomInput = document.getElementById('modalRoom');
+  
+  if (!modal || !title || !sub) return;
+  
+  // Set values
+  modalProgInput.value = program;
+  modalRoomInput.value = room;
+  sub.textContent = `${program} · ${room}`;
+  
+  // Show modal and lock body scroll
+  modal.classList.remove('hidden');
+  document.body.classList.add('no-scroll');
+}
+
+function closeEnquiryModal() {
+  const modal = document.getElementById('enquiryModal');
+  const msg = document.getElementById('modalMsg');
+  const form = document.getElementById('modalForm');
+  
+  if (!modal) return;
+  
+  modal.classList.add('hidden');
+  document.body.classList.remove('no-scroll');
+  
+  // Reset message and form
+  if (msg) {
+    msg.className = 'discovery-message hidden';
+    msg.textContent = '';
+  }
+  if (form) {
+    form.reset();
+  }
+}
+
+// Close on outside click
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('enquiryModal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeEnquiryModal();
+      }
+    });
+  }
+});
+
+function submitModalEnquiry(e) {
+  e.preventDefault();
+  const btn = document.getElementById('modalSubmitBtn');
+  const msg = document.getElementById('modalMsg');
+  const form = document.getElementById('modalForm');
+  
+  if (!btn || !msg || !form) return;
+  
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  msg.className = 'discovery-message hidden';
+  msg.textContent = '';
+  
+  const contactVal = document.getElementById('modalContact').value;
+  const nameVal = document.getElementById('modalName').value;
+  const progVal = document.getElementById('modalProg').value;
+  const roomVal = document.getElementById('modalRoom').value;
+  const isEmail = contactVal.includes('@');
+  
+  const formData = new FormData();
+  formData.append('name', nameVal);
+  formData.append('email', isEmail ? contactVal : 'no-email-provided@himyog.com');
+  formData.append('phone', isEmail ? '' : contactVal);
+  formData.append('program', progVal + ' (' + roomVal + ')');
+  formData.append('message', 'Enquiry from Pricing Card Modal Popup.\nSelected Program: ' + progVal + '\nSelected Package: ' + roomVal + '\nContact Details: ' + contactVal);
+  
+  fetch('contact.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      msg.textContent = '✅ Reservation Request Sent! We will contact you on WhatsApp/Email within 24 hours.';
+      msg.className = 'discovery-message success';
+      form.reset();
+      
+      // Auto close after 3 seconds
+      setTimeout(() => {
+        closeEnquiryModal();
+      }, 3000);
+    } else {
+      throw new Error('Server response error');
+    }
+  })
+  .catch(err => {
+    msg.textContent = '❌ Error submitting. Please try again or WhatsApp us directly.';
+    msg.className = 'discovery-message error';
+  })
+  .finally(() => {
+    btn.textContent = 'Send Reservation Request →';
+    btn.disabled = false;
+  });
+}
+
 

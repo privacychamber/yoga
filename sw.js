@@ -1,9 +1,9 @@
-const CACHE_NAME = 'himyog-v4';
+const CACHE_NAME = 'himyog-v5';
 const ASSETS = [
   '/',
   '/index.html',
-  '/style.css?v=5',
-  '/script.js?v=5',
+  '/style.css?v=6',
+  '/script.js?v=6',
   '/manifest.json',
   '/favicon.svg'
 ];

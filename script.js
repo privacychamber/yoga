@@ -12,7 +12,7 @@ const html = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
 
 // Load saved theme or default to dark
-const savedTheme = localStorage.getItem('theme') || 'dark';
+const savedTheme = localStorage.getItem('theme') || 'light';
 html.setAttribute('data-theme', savedTheme);
 
 themeToggle.addEventListener('click', () => {

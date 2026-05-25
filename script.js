@@ -345,6 +345,13 @@ function openEnquiryModal(program, room) {
   modalProgInput.value = program;
   modalRoomInput.value = room;
   sub.textContent = `${program} · ${room}`;
+
+  // Set WhatsApp dynamic button link
+  const modalWaBtn = document.getElementById('modalWaBtn');
+  if (modalWaBtn) {
+    const waText = encodeURIComponent(`Namaste! I'm interested in enquiring about the ${program} - ${room} package.`);
+    modalWaBtn.href = `https://wa.me/919418100803?text=${waText}`;
+  }
   
   // Show modal and lock body scroll
   modal.classList.remove('hidden');

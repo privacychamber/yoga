@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=7"/>
+<link rel="stylesheet" href="style.css?v=8"/>
 <link rel="manifest" href="manifest.json"/>
 <meta name="theme-color" content="#080A12"/>
 <link rel="apple-touch-icon" href="favicon.svg"/>
@@ -307,14 +307,20 @@
         <h4>Air / Sun / Moon Room</h4><small>Single Occupancy</small>
         <div class="orig">$1,900</div><div class="disc">$1,235 <span>Early Bird</span></div>
         <ul><li>✦ 25 days accommodation</li><li>✦ All Ayurvedic meals</li><li>✦ Full 200-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Course materials</li></ul>
-        <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', 'Air / Sun / Moon Room')" class="btn-primary">Reserve Spot →</a>
+        <div class="card-actions">
+          <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', 'Air / Sun / Moon Room')" class="btn-primary sm">Reserve Spot</a>
+          <a href="https://wa.me/919418100803?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20200-Hour%20YTTC%20-%20Air%20%2F%20Sun%20%2F%20Moon%20Room%20package." target="_blank" class="btn-wa sm">💬 WhatsApp</a>
+        </div>
       </div>
       <div class="prcard best">
         <div class="bestbadge">Best Value</div>
         <h4>Star Cottage</h4><small>2–3 People</small>
         <div class="orig">$3,400</div><div class="disc">$2,210 <span>Early Bird</span></div>
         <ul><li>✦ 25 days private cottage</li><li>✦ All Ayurvedic meals</li><li>✦ Full 200-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Course materials</li><li>✦ Private sit-out area</li></ul>
-        <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', 'Star Cottage')" class="btn-primary">Reserve Spot →</a>
+        <div class="card-actions">
+          <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', 'Star Cottage')" class="btn-primary sm">Reserve Spot</a>
+          <a href="https://wa.me/919418100803?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20200-Hour%20YTTC%20-%20Star%20Cottage%20package." target="_blank" class="btn-wa sm">💬 WhatsApp</a>
+        </div>
       </div>
     </div>
     <div class="pgrid hidden" id="p300">
@@ -322,13 +328,19 @@
         <h4>Air / Sun / Moon Room</h4><small>Single Occupancy</small>
         <div class="orig">$2,690</div><div class="disc">$1,748.50 <span>Early Bird</span></div>
         <ul><li>✦ 35 days accommodation</li><li>✦ All homely veg meals</li><li>✦ Full 300-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Advanced materials</li></ul>
-        <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', 'Air / Sun / Moon Room')" class="btn-primary">Reserve Spot →</a>
+        <div class="card-actions">
+          <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', 'Air / Sun / Moon Room')" class="btn-primary sm">Reserve Spot</a>
+          <a href="https://wa.me/919418100803?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20300-Hour%20YTTC%20-%20Air%20%2F%20Sun%20%2F%20Moon%20Room%20package." target="_blank" class="btn-wa sm">💬 WhatsApp</a>
+        </div>
       </div>
       <div class="prcard best">
         <h4>Star Cottage</h4><small>2–3 People</small>
         <div class="orig">$4,815</div><div class="disc">$3,129.75 <span>Early Bird</span></div>
         <ul><li>✦ 35 days private cottage</li><li>✦ All homely veg meals</li><li>✦ Full 300-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Advanced materials</li><li>✦ Private sit-out area</li></ul>
-        <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', 'Star Cottage')" class="btn-primary">Reserve Spot →</a>
+        <div class="card-actions">
+          <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', 'Star Cottage')" class="btn-primary sm">Reserve Spot</a>
+          <a href="https://wa.me/919418100803?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20300-Hour%20YTTC%20-%20Star%20Cottage%20package." target="_blank" class="btn-wa sm">💬 WhatsApp</a>
+        </div>
       </div>
     </div>
   </div>
@@ -469,10 +481,12 @@
       </div>
       <button type="submit" class="btn-primary full" id="modalSubmitBtn">Send Reservation Request →</button>
     </form>
+    <div class="modal-divider"><span>or</span></div>
+    <a id="modalWaBtn" href="#" target="_blank" class="btn-wa full">💬 Enquire via WhatsApp Instantly</a>
     <div id="modalMsg" class="discovery-message hidden"></div>
   </div>
 </div>
 
-<script src="script.js?v=7"></script>
+<script src="script.js?v=8"></script>
 </body>
 </html>

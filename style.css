@@ -1791,3 +1791,84 @@ body.no-scroll {
   background: var(--bg-alt);
   box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
 }
+
+/* ===== CARD ACTIONS ===== */
+.card-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+.card-actions .btn-primary,
+.card-actions .btn-wa {
+  flex: 1;
+}
+
+/* ===== WHATSAPP CTA BUTTON ===== */
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #25D366;
+  color: #FFFFFF !important;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius-full);
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-wa:hover {
+  background: #128C7E;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
+}
+.btn-wa.sm {
+  padding: 0.6rem 1rem;
+  font-size: 0.82rem;
+}
+.btn-wa.full {
+  width: 100%;
+  text-align: center;
+}
+
+/* ===== MODAL OR DIVIDER ===== */
+.modal-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.2rem 0;
+  color: var(--text-mute);
+}
+.modal-divider::before,
+.modal-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--glass-border);
+}
+.modal-divider:not(:empty)::before {
+  margin-right: .75em;
+}
+.modal-divider:not(:empty)::after {
+  margin-left: .75em;
+}
+.modal-divider span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-mute);
+}
+
+@media (max-width: 480px) {
+  .card-actions {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}

@@ -6,7 +6,7 @@ $config_file = 'admin_config_9418.json';
 $config = array(
     'admin_email' => 'privacy.chamber@gmail.com',
     'send_client_conf' => true,
-    'password_hash' => '$2y$10$PszB39.2dJpU2JjP6iO8VeqXFmZ5fO8U.eX5d4uG6gH7hI8j9k0l1' // Default: himyog_admin_2026
+    'password_hash' => '$2y$10$3Ud/FA2zIUPr2qVRbp/uNO9p2yJyoJ7p3zU4tl8izKro0wzSZxEkm' // Default: himyog_admin_2026
 );
 
 if (file_exists($config_file)) {

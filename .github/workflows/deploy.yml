@@ -28,3 +28,5 @@ jobs:
           **/node_modules/**
           .antigravity/**
           test.html
+          admin_config_9418.json
+          enquiries_backup_9418.csv

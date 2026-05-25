@@ -20,44 +20,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_headers .= "Reply-To: $email\r\n";
 
     if (mail($recipient, $subject, $email_content, $email_headers)) {
+        // Save to local CSV backup file (securely protected)
+        $log_file = "enquiries_backup_9418.csv";
+        $file_exists = file_exists($log_file);
+        $fp = fopen($log_file, 'a');
+        if ($fp) {
+            if (!$file_exists) {
+                fputcsv($fp, ['Date', 'Name', 'Email', 'Phone', 'Program', 'Message']);
+            }
+            fputcsv($fp, [date('Y-m-d H:i:s'), $name, $email, $phone, $program, $message]);
+            fclose($fp);
+        }
+
         // Send confirmation email to client if a valid email was provided
         if (filter_var($email, FILTER_VALIDATE_EMAIL) && $email !== "no-email-provided@himyog.com") {
             $client_subject = "Enquiry Received - HimYog Yoga Kendra";
             
-            $client_message = "
-            <html>
-            <head>
-              <title>Thank you for your enquiry</title>
-            </head>
-            <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333;\">
-              <div style=\"max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;\">
-                <h2 style=\"color: #D4AF37; margin-bottom: 20px;\">ॐ Namaste $name,</h2>
-                <p>Thank you for reaching out to <strong>HimYog Yoga Kendra</strong> in Dharamsala!</p>
-                <p>We have received your enquiry for the <strong>$program</strong> and our team is already reviewing it. We will get back to you with all the details via WhatsApp or Email within 24 hours.</p>
-                
-                <hr style=\"border: none; border-top: 1px solid #e2e8f0; margin: 20px 0;\" />
-                
-                <h3 style=\"color: #D4AF37;\">Summary of your enquiry:</h3>
-                <ul style=\"list-style: none; padding: 0;\">
-                  <li><strong>Program:</strong> $program</li>
-                  <li><strong>Name:</strong> $name</li>
-                  <li><strong>WhatsApp/Phone:</strong> $phone</li>
-                </ul>
-                
-                <p>If you have any immediate questions, feel free to reply directly to this email or chat with us on WhatsApp at <a href=\"https://wa.me/919418100803\" style=\"color: #D4AF37; text-decoration: none;\">+91 9418100803</a>.</p>
-                
-                <p style=\"margin-top: 30px;\">Warm regards,<br/><strong>Yogi Shivam & The HimYog Team</strong><br/><a href=\"https://himyog.com\" style=\"color: #D4AF37; text-decoration: none;\">himyog.com</a></p>
-              </div>
-            </body>
-            </html>
-            ";
+            $client_content = "ॐ Namaste $name,\n\n";
+            $client_content .= "Thank you for reaching out to HimYog Yoga Kendra in Dharamsala!\n\n";
+            $client_content .= "We have received your enquiry for the $program and our team is already reviewing it. We will get back to you with all the details via WhatsApp or Email within 24 hours.\n\n";
+            $client_content .= "Summary of your enquiry:\n";
+            $client_content .= "------------------------\n";
+            $client_content .= "Program: $program\n";
+            $client_content .= "Name: $name\n";
+            $client_content .= "WhatsApp/Phone: $phone\n\n";
+            $client_content .= "If you have any immediate questions, feel free to reply directly to this email or chat with us on WhatsApp at +91 9418100803 (https://wa.me/919418100803).\n\n";
+            $client_content .= "Warm regards,\n";
+            $client_content .= "Yogi Shivam & The HimYog Team\n";
+            $client_content .= "https://himyog.com\n";
             
-            $client_headers = "MIME-Version: 1.0\r\n";
-            $client_headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-            $client_headers .= "From: HimYog <noreply@himyog.com>\r\n";
+            $client_headers = "From: HimYog Website <noreply@himyog.com>\r\n";
             $client_headers .= "Reply-To: privacy.chamber@gmail.com\r\n";
             
-            mail($email, $client_subject, $client_message, $client_headers);
+            mail($email, $client_subject, $client_content, $client_headers);
         }
 
         http_response_code(200);

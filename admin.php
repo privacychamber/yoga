@@ -166,9 +166,15 @@ $sourceModalPercent = $totalLeads > 0 ? round(($sourceModalCount / $totalLeads) 
 $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads) * 100) : 0;
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HimYog Leads Admin Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -192,6 +198,72 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
       --radius-md: 16px;
       --radius-sm: 8px;
     }
+    
+    [data-theme="light"] {
+      --bg: #FFFFFF;
+      --bg-alt: #F9F7F2;
+      --bg-accent: #F0EDE5;
+      --glass: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      
+      --gold: #8B6508;
+      --gold-glow: #B8860B;
+      --text-main: #121417;
+      --text-dim: #374151;
+      --text-mute: #6B7280;
+    }
+
+    /* Light Theme Custom Overrides */
+    [data-theme="light"] .btn-action.logout {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+    [data-theme="light"] tr:hover td {
+      background: rgba(0, 0, 0, 0.02);
+    }
+    [data-theme="light"] .bar-outer {
+      background: rgba(0, 0, 0, 0.06);
+    }
+    [data-theme="light"] .switch-fg {
+      background: rgba(0, 0, 0, 0.02);
+      border-color: rgba(0, 0, 0, 0.04);
+    }
+    [data-theme="light"] .table-container,
+    [data-theme="light"] .chart-box,
+    [data-theme="light"] .settings-box {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    [data-theme="light"] .login-container {
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    }
+    
+    /* Theme Toggle Button Styles */
+    .theme-toggle-header-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    .theme-toggle {
+      background: var(--bg-accent);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      padding: 0.5rem 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      height: 38px;
+    }
+    .theme-toggle:hover {
+      border-color: var(--gold);
+      background: var(--bg-alt);
+    }
+    [data-theme="dark"] .toggle-sun { opacity: 0.3; }
+    [data-theme="light"] .toggle-moon { opacity: 0.3; }
     
     *, *::before, *::after {
       box-sizing: border-box;
@@ -519,7 +591,7 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
     
     td {
       padding: 1.2rem 1.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--glass-border);
       color: var(--text-dim);
       vertical-align: top;
     }
@@ -939,6 +1011,14 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
 <body>
 
 <?php if (!isset($_SESSION['admin_logged_in'])): ?>
+  <!-- Absolute positioned theme toggle for login page -->
+  <div class="theme-toggle-header-btn">
+    <button class="theme-toggle" id="themeToggleLogin" aria-label="Toggle theme">
+      <span class="toggle-sun">☀️</span>
+      <span class="toggle-moon">🌙</span>
+    </button>
+  </div>
+
   <!-- LOGIN SECTION -->
   <div class="login-container">
     <span class="om-logo">ॐ</span>
@@ -970,7 +1050,11 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
         </div>
       </div>
       
-      <div class="actions-area">
+      <div class="actions-area" style="align-items: center;">
+        <button class="theme-toggle" id="themeToggleDash" aria-label="Toggle theme">
+          <span class="toggle-sun">☀️</span>
+          <span class="toggle-moon">🌙</span>
+        </button>
         <a href="admin.php?action=download" class="btn-action download">📥 Export CSV</a>
         <a href="admin.php?action=logout" class="btn-action logout">🚪 Logout</a>
       </div>
@@ -1162,7 +1246,7 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
           <button type="submit" name="save_settings" class="btn-login">Save Changes & Update Settings →</button>
         </form>
         
-        <div class="settings-box" style="background: rgba(255, 255, 255, 0.01); display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="settings-box" style="display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <h3>System Info</h3>
             <p class="settings-help" style="margin-bottom: 1rem;">
@@ -1315,6 +1399,26 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
     }
   </script>
 <?php endif; ?>
+
+<script>
+  // Global theme toggle handling
+  (function() {
+    const toggles = [
+      document.getElementById('themeToggleLogin'),
+      document.getElementById('themeToggleDash')
+    ];
+    toggles.forEach(toggle => {
+      if (toggle) {
+        toggle.addEventListener('click', function() {
+          const current = document.documentElement.getAttribute('data-theme') || 'light';
+          const next = current === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+        });
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>

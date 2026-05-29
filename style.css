@@ -1689,7 +1689,20 @@ footer p {
   .policy-wrap { padding: 40px 20px; }
 }
 
-/* Removed logo-img styles */
+/* ===== LOGO IMAGE STYLES ===== */
+.logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.35));
+  transition: var(--transition);
+}
+.logo-img:hover {
+  transform: scale(1.05);
+}
+.logo-img.footer-logo {
+  height: 60px;
+}
 
 /* ===== ENQUIRY MODAL ===== */
 body.no-scroll {

@@ -265,6 +265,18 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
     [data-theme="dark"] .toggle-sun { opacity: 0.3; }
     [data-theme="light"] .toggle-moon { opacity: 0.3; }
     
+    /* Logo Image Styles */
+    .logo-img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+      transition: all 0.3s ease;
+    }
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+    
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -1021,7 +1033,7 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
 
   <!-- LOGIN SECTION -->
   <div class="login-container">
-    <span class="om-logo">ॐ</span>
+    <img src="logo.png" alt="HimYog Logo" class="logo-img" style="height: 80px; margin-bottom: 1.5rem; display: inline-block;">
     <h2>HIMYOG</h2>
     <p class="login-sub">LEADS MANAGEMENT DASHBOARD</p>
     
@@ -1043,7 +1055,7 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
   <div class="dashboard-wrap">
     <header>
       <div class="logo-area">
-        <span class="cinzel" style="font-size: 2rem; color: var(--gold); line-height: 1;">ॐ</span>
+        <img src="logo.png" alt="HimYog Logo" class="logo-img" style="height: 48px;">
         <div>
           <strong class="cinzel">HIMYOG</strong>
           <span style="font-size:0.75rem; letter-spacing:0.1em; color:var(--text-mute); display:block; text-transform:uppercase;">Admin Leads Portal</span>

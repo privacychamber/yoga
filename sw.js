@@ -1,4 +1,4 @@
-const CACHE_NAME = 'himyog-v8';
+const CACHE_NAME = 'himyog-v9';
 const ASSETS = [
   '/',
   '/index.html',

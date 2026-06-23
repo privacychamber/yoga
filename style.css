@@ -767,7 +767,7 @@ h2 em {
 }
 
 .quiz-result h4{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.5rem}
-.hidden{display:none}
+.hidden{display:none !important}
 
 /* ===== LOCATION ===== */
 .loc-wrap {

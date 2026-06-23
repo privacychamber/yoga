@@ -1474,9 +1474,16 @@ footer p {
   .inst-stats { justify-content: center; }
   .ya-badges { justify-content: center; }
   .timeline::before { left: 30px; }
-  .titem { grid-template-columns: 80px 1fr; gap: 2rem; }
-  .ttime { text-align: left; }
-  .tdot { margin-left: 0; }
+  .titem { 
+    grid-template-columns: 60px 1fr; 
+    grid-template-areas: 
+      "dot time"
+      ". content";
+    gap: 0.5rem 0; 
+  }
+  .ttime { grid-area: time; text-align: left; padding-top: 0.2rem; }
+  .tdot { grid-area: dot; margin: 0 auto; }
+  .tcontent { grid-area: content; width: 100%; box-sizing: border-box; }
   .loc-float-card { left: 1rem; bottom: 1rem; }
   .loc-visual img { height: 400px; }
   .bpoint { text-align: left; }

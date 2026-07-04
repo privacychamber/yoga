@@ -1702,6 +1702,7 @@ footer p {
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.35));
+  border-radius: 12px;
   transition: var(--transition);
 }
 .logo-img:hover {

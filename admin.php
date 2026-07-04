@@ -271,6 +271,7 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
       width: auto;
       object-fit: contain;
       filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+      border-radius: 12px;
       transition: all 0.3s ease;
     }
     .logo-img:hover {
@@ -1033,7 +1034,7 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
 
   <!-- LOGIN SECTION -->
   <div class="login-container">
-    <img src="logo.png" alt="HimYog Logo" class="logo-img" style="height: 80px; margin-bottom: 1.5rem; display: inline-block;">
+    <img src="logo.jpg" alt="HimYog Logo" class="logo-img" style="height: 80px; margin-bottom: 1.5rem; display: inline-block;">
     <h2>HIMYOG</h2>
     <p class="login-sub">LEADS MANAGEMENT DASHBOARD</p>
     
@@ -1055,7 +1056,7 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
   <div class="dashboard-wrap">
     <header>
       <div class="logo-area">
-        <img src="logo.png" alt="HimYog Logo" class="logo-img" style="height: 48px;">
+        <img src="logo.jpg" alt="HimYog Logo" class="logo-img" style="height: 48px;">
         <div>
           <strong class="cinzel">HIMYOG</strong>
           <span style="font-size:0.75rem; letter-spacing:0.1em; color:var(--text-mute); display:block; text-transform:uppercase;">Admin Leads Portal</span>

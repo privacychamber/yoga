@@ -1698,7 +1698,7 @@ footer p {
 
 /* ===== LOGO IMAGE STYLES ===== */
 .logo-img {
-  height: 48px;
+  height: 90px;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.35));
@@ -1709,7 +1709,7 @@ footer p {
   transform: scale(1.05);
 }
 .logo-img.footer-logo {
-  height: 60px;
+  height: 120px;
 }
 
 /* ===== ENQUIRY MODAL ===== */

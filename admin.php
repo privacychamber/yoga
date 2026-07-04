@@ -168,6 +168,7 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
   <meta charset="UTF-8">
   <script>
     (function() {

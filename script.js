@@ -170,7 +170,75 @@ function updateDiscoveryBatches() {
 // Initial populate of batches on load
 document.addEventListener('DOMContentLoaded', () => {
   updateDiscoveryBatches();
+  loadDynamicContent();
 });
+
+/* ===== DYNAMIC CONTENT ===== */
+async function loadDynamicContent() {
+  try {
+    const response = await fetch('content.json?' + new Date().getTime());
+    if (!response.ok) return;
+    const data = await response.json();
+    
+    // Update Room Images
+    if (data.rooms) {
+      if (data.rooms.room1) {
+        const room1Img = document.getElementById('room1-img');
+        if (room1Img) room1Img.src = data.rooms.room1;
+      }
+      if (data.rooms.room2) {
+        const room2Img = document.getElementById('room2-img');
+        if (room2Img) room2Img.src = data.rooms.room2;
+      }
+    }
+    
+    // Update Gallery
+    if (data.gallery && Array.isArray(data.gallery)) {
+      const galleryGrid = document.getElementById('gallery-grid');
+      if (galleryGrid) {
+        if (data.gallery.length === 0) {
+          galleryGrid.innerHTML = '<div class="gallery-empty">No images uploaded yet.</div>';
+        } else {
+          galleryGrid.innerHTML = data.gallery.map(img => `
+            <div class="gallery-item" onclick="openLightbox('${img}')">
+              <img src="${img}" alt="Ashram Life">
+            </div>
+          `).join('');
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error loading dynamic content:", error);
+  }
+}
+
+// Lightbox feature
+function openLightbox(src) {
+  const lightbox = document.createElement('div');
+  lightbox.style.position = 'fixed';
+  lightbox.style.top = '0';
+  lightbox.style.left = '0';
+  lightbox.style.width = '100vw';
+  lightbox.style.height = '100vh';
+  lightbox.style.backgroundColor = 'rgba(0,0,0,0.9)';
+  lightbox.style.display = 'flex';
+  lightbox.style.alignItems = 'center';
+  lightbox.style.justifyContent = 'center';
+  lightbox.style.zIndex = '9999';
+  lightbox.style.cursor = 'pointer';
+  
+  const img = document.createElement('img');
+  img.src = src;
+  img.style.maxWidth = '90%';
+  img.style.maxHeight = '90%';
+  img.style.objectFit = 'contain';
+  img.style.borderRadius = '8px';
+  img.style.boxShadow = '0 0 30px rgba(0,0,0,0.5)';
+  
+  lightbox.appendChild(img);
+  lightbox.onclick = () => lightbox.remove();
+  document.body.appendChild(lightbox);
+}
 
 /* ===== SUBMIT DISCOVERY FORM ===== */
 function submitDiscoveryForm(e) {

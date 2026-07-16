@@ -85,6 +85,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_settings']) && is
     }
 }
 
+// Website Content handling
+$content_file = 'content.json';
+$content_data = array('gallery' => array(), 'rooms' => array('room1' => 'rooms.png', 'room2' => 'rooms.png'));
+if (file_exists($content_file)) {
+    $json = json_decode(file_get_contents($content_file), true);
+    if ($json) $content_data = $json;
+}
+
+$content_msg = '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['admin_logged_in'])) {
+    if (isset($_POST['save_rooms'])) {
+        $upload_dir = 'uploads/';
+        if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
+        
+        if (isset($_FILES['room1_image']) && $_FILES['room1_image']['error'] == 0) {
+            $ext = pathinfo($_FILES['room1_image']['name'], PATHINFO_EXTENSION);
+            $filename = 'room1_' . time() . '.' . $ext;
+            if (move_uploaded_file($_FILES['room1_image']['tmp_name'], $upload_dir . $filename)) {
+                $content_data['rooms']['room1'] = $upload_dir . $filename;
+            }
+        }
+        if (isset($_FILES['room2_image']) && $_FILES['room2_image']['error'] == 0) {
+            $ext = pathinfo($_FILES['room2_image']['name'], PATHINFO_EXTENSION);
+            $filename = 'room2_' . time() . '.' . $ext;
+            if (move_uploaded_file($_FILES['room2_image']['tmp_name'], $upload_dir . $filename)) {
+                $content_data['rooms']['room2'] = $upload_dir . $filename;
+            }
+        }
+        file_put_contents($content_file, json_encode($content_data, JSON_PRETTY_PRINT));
+        $content_msg = 'Room images updated successfully!';
+    }
+    
+    if (isset($_POST['upload_gallery'])) {
+        $upload_dir = 'uploads/';
+        if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
+        
+        if (isset($_FILES['gallery_images'])) {
+            foreach ($_FILES['gallery_images']['tmp_name'] as $key => $tmp_name) {
+                if ($_FILES['gallery_images']['error'][$key] == 0) {
+                    $ext = pathinfo($_FILES['gallery_images']['name'][$key], PATHINFO_EXTENSION);
+                    $filename = 'gallery_' . time() . '_' . $key . '.' . $ext;
+                    if (move_uploaded_file($tmp_name, $upload_dir . $filename)) {
+                        $content_data['gallery'][] = $upload_dir . $filename;
+                    }
+                }
+            }
+            file_put_contents($content_file, json_encode($content_data, JSON_PRETTY_PRINT));
+            $content_msg = 'Gallery images uploaded successfully!';
+        }
+    }
+    
+    if (isset($_POST['delete_gallery']) && $_POST['delete_gallery'] !== '') {
+        $index = intval($_POST['delete_gallery']);
+        if (isset($content_data['gallery'][$index])) {
+            if (file_exists($content_data['gallery'][$index])) {
+                unlink($content_data['gallery'][$index]);
+            }
+            array_splice($content_data['gallery'], $index, 1);
+            file_put_contents($content_file, json_encode($content_data, JSON_PRETTY_PRINT));
+            $content_msg = 'Gallery image deleted successfully!';
+        }
+    }
+}
+
 // Read CSV data if logged in
 $leads = array();
 if (isset($_SESSION['admin_logged_in'])) {
@@ -1079,6 +1143,7 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
       <button class="tab-btn active" onclick="switchTab('enquiries', this)">Enquiries</button>
       <button class="tab-btn" onclick="switchTab('analytics', this)">Analytics</button>
       <button class="tab-btn" onclick="switchTab('settings', this)">Settings</button>
+      <button class="tab-btn" onclick="switchTab('website-content', this)">Website Content</button>
     </div>
     
     <?php if ($settings_saved): ?>
@@ -1228,6 +1293,68 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
       </div>
     </div>
     
+    <!-- T4: WEBSITE CONTENT TAB -->
+    <div id="website-content" class="tab-content">
+      <?php if ($content_msg): ?>
+        <div class="save-msg" style="margin-bottom: 20px;">✅ <?php echo htmlspecialchars($content_msg); ?></div>
+      <?php endif; ?>
+      
+      <div class="settings-grid">
+        <form method="POST" action="admin.php" enctype="multipart/form-data" class="settings-box">
+          <h3>Room Images</h3>
+          
+          <div class="fg">
+            <label for="room1_image">Air, Sun & Moon Rooms Image</label>
+            <div style="margin-bottom: 10px;">
+                <img src="<?php echo htmlspecialchars($content_data['rooms']['room1']); ?>" style="max-width: 150px; border-radius: 8px;">
+            </div>
+            <input type="file" name="room1_image" id="room1_image" accept="image/*">
+          </div>
+          
+          <div class="fg" style="border-top: 1px solid var(--glass-border); padding-top: 1.5rem; margin-top: 1.5rem;">
+            <label for="room2_image">The Star Cottage Image</label>
+            <div style="margin-bottom: 10px;">
+                <img src="<?php echo htmlspecialchars($content_data['rooms']['room2']); ?>" style="max-width: 150px; border-radius: 8px;">
+            </div>
+            <input type="file" name="room2_image" id="room2_image" accept="image/*">
+          </div>
+          
+          <button type="submit" name="save_rooms" class="btn-login">Update Room Images →</button>
+        </form>
+        
+        <div class="settings-box">
+          <h3>Gallery Images</h3>
+          <form method="POST" action="admin.php" enctype="multipart/form-data" style="margin-bottom: 2rem;">
+            <div class="fg">
+              <label for="gallery_images">Upload New Gallery Images</label>
+              <input type="file" name="gallery_images[]" id="gallery_images" accept="image/*" multiple required>
+            </div>
+            <button type="submit" name="upload_gallery" class="btn-login" style="background: var(--bg-alt); color: var(--gold); border: 1px solid var(--gold);">Upload Images</button>
+          </form>
+          
+          <div style="border-top: 1px solid var(--glass-border); padding-top: 1.5rem;">
+            <label style="display: block; font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 0.5rem; text-transform: uppercase;">Current Gallery</label>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px;">
+                <?php if (empty($content_data['gallery'])): ?>
+                    <p style="color: var(--text-mute); font-size: 0.85rem; grid-column: 1 / -1;">No images in gallery.</p>
+                <?php else: ?>
+                    <?php foreach ($content_data['gallery'] as $index => $img_path): ?>
+                        <div style="position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 1/1;">
+                            <img src="<?php echo htmlspecialchars($img_path); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <form method="POST" action="admin.php" style="position: absolute; top: 5px; right: 5px;">
+                                <input type="hidden" name="delete_gallery" value="<?php echo $index; ?>">
+                                <button type="submit" style="background: rgba(255,0,0,0.8); color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px;">&times;</button>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- T3: SETTINGS TAB -->
     <div id="settings" class="tab-content">
       <div class="settings-grid">

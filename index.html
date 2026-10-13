@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css?v=11"/>
+<link rel="stylesheet" href="style.css?v=15"/>
 <link rel="manifest" href="manifest.json"/>
 <meta name="theme-color" content="#080A12"/>
 <link rel="apple-touch-icon" href="favicon.svg"/>
@@ -20,7 +20,8 @@
 <div class="particles" id="particles"></div>
 
 <!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/919418100803" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+<a href="https://wa.me/918894787858?text=Namaste!%20I%20would%20like%20to%20enquire%20about%20HimYog%20Yoga%20courses." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp +91 88947 87858">
+  <span class="wa-tooltip">💬 Chat on WhatsApp (+91 88947 87858)</span>
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.562 4.14 1.535 5.876L0 24l6.29-1.51A11.933 11.933 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.998-1.366l-.358-.213-3.732.896.944-3.63-.234-.373A9.79 9.79 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
 </a>
 
@@ -103,7 +104,7 @@
     <div class="hero-btns-pills">
       <a href="#programs" class="btn-pill primary">🎓 Explore Courses</a>
       <a href="#accommodation" class="btn-pill outline">🏡 Rooms &amp; Cottage</a>
-      <a href="https://wa.me/919418100803" target="_blank" class="btn-pill outline">💬 WhatsApp Us</a>
+      <a href="https://wa.me/918894787858" target="_blank" rel="noopener noreferrer" class="btn-pill outline">💬 WhatsApp Us</a>
     </div>
 
     <!-- TRUST LINE -->
@@ -308,54 +309,320 @@
 <section id="pricing">
   <div class="section-wrap">
     <p class="eyebrow">Investment in Yourself</p>
-    <h2>Transparent<br/><em>Pricing</em></h2>
-    <p class="section-sub">Book <strong>10 days before arrival</strong> and receive an automatic <span class="disc-badge">35% Early Bird Discount</span></p>
+    <h2>Transparent<br/><em>Pricing &amp; Batches</em></h2>
+    <p class="section-sub">All-inclusive retreat pricing including accommodation, Ayurvedic vegetarian meals, course materials &amp; Yoga Alliance certification.</p>
     <div class="ptabs">
       <button class="ptab active" onclick="switchPricing('200',this)">200-Hour YTTC</button>
       <button class="ptab" onclick="switchPricing('300',this)">300-Hour YTTC</button>
     </div>
-    <div class="pgrid" id="p200">
-      <div class="prcard">
-        <h4>Air / Sun / Moon Room</h4><small>Single Occupancy</small>
-        <div class="orig">$1,900</div><div class="disc">$1,235 <span>Early Bird</span></div>
-        <ul><li>✦ 25 days accommodation</li><li>✦ All Ayurvedic meals</li><li>✦ Full 200-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Course materials</li></ul>
-        <div class="card-actions">
-          <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', 'Air / Sun / Moon Room')" class="btn-primary sm">Reserve Spot</a>
-          <a href="https://wa.me/919418100803?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20200-Hour%20YTTC%20-%20Air%20%2F%20Sun%20%2F%20Moon%20Room%20package." target="_blank" class="btn-wa sm">💬 WhatsApp</a>
+    <!-- 200 PLAN -->
+    <div id="p200" class="plan-panel">
+      <div class="pgrid">
+        <div class="prcard">
+          <h4>Air / Sun / Moon Room</h4><small class="room-sub">Single Occupancy (Air 1, 2, 3 · Sun · Moon)</small>
+          <div class="disc">$1,900</div>
+          <span class="price-note">All-Inclusive · No Hidden Fees</span>
+          <ul>
+            <li>✦ 24 Days All-Inclusive Retreat</li>
+            <li>✦ Private handcrafted room accommodation</li>
+            <li>✦ All wholesome Ayurvedic meals daily</li>
+            <li>✦ Full 200-hr curriculum &amp; teaching methodology</li>
+            <li>✦ Yoga Alliance RYS 200 certification</li>
+            <li>✦ Course manuals &amp; study materials</li>
+          </ul>
+          <div class="card-actions">
+            <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', 'Air / Sun / Moon Room')" class="btn-primary sm">Reserve Spot</a>
+            <a href="https://wa.me/918894787858?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20200-Hour%20YTTC%20-%20Air%20%2F%20Sun%20%2F%20Moon%20Room%20package." target="_blank" rel="noopener noreferrer" class="btn-wa sm">💬 WhatsApp</a>
+          </div>
+        </div>
+        <div class="prcard best">
+          <div class="bestbadge">Best for Groups</div>
+          <h4>Star Cottage</h4><small class="room-sub">Suitable for 2–3 People</small>
+          <div class="disc">$3,400</div>
+          <span class="price-note">All-Inclusive for 2–3 Persons</span>
+          <ul>
+            <li>✦ 24 Days All-Inclusive Retreat</li>
+            <li>✦ Spacious private cottage in nature</li>
+            <li>✦ All wholesome Ayurvedic meals daily</li>
+            <li>✦ Full 200-hr curriculum &amp; teaching methodology</li>
+            <li>✦ Yoga Alliance RYS 200 certification</li>
+            <li>✦ Private sit-out area &amp; mountain views</li>
+          </ul>
+          <div class="card-actions">
+            <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', 'Star Cottage')" class="btn-primary sm">Reserve Spot</a>
+            <a href="https://wa.me/918894787858?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20200-Hour%20YTTC%20-%20Star%20Cottage%20package." target="_blank" rel="noopener noreferrer" class="btn-wa sm">💬 WhatsApp</a>
+          </div>
         </div>
       </div>
-      <div class="prcard best">
-        <div class="bestbadge">Best Value</div>
-        <h4>Star Cottage</h4><small>2–3 People</small>
-        <div class="orig">$3,400</div><div class="disc">$2,210 <span>Early Bird</span></div>
-        <ul><li>✦ 25 days private cottage</li><li>✦ All Ayurvedic meals</li><li>✦ Full 200-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Course materials</li><li>✦ Private sit-out area</li></ul>
-        <div class="card-actions">
-          <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', 'Star Cottage')" class="btn-primary sm">Reserve Spot</a>
-          <a href="https://wa.me/919418100803?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20200-Hour%20YTTC%20-%20Star%20Cottage%20package." target="_blank" class="btn-wa sm">💬 WhatsApp</a>
+
+      <!-- UPCOMING 200-HOUR BATCH DATES -->
+      <div class="batch-dates-container">
+        <div class="batch-dates-header">
+          <span class="batch-icon">📅</span>
+          <div>
+            <h3>200-Hour YTTC Batch Dates · Dharamsala</h3>
+            <p>Maximum 12 students per intake. Select your preferred batch to secure your room.</p>
+          </div>
+        </div>
+
+        <div class="batch-years-grid">
+          <!-- 2026 DATES -->
+          <div class="batch-year-card">
+            <div class="year-badge">2026 Dates · Dharamsala</div>
+            <div class="batch-list">
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Oct – 24th Oct 2026</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Oct – 24th Oct 2026')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Oct%20%E2%80%93%2024th%20Oct%202026)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Nov – 24th Nov 2026</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Nov – 24th Nov 2026')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Nov%20%E2%80%93%2024th%20Nov%202026)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Dec – 24th Dec 2026</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Dec – 24th Dec 2026')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Dec%20%E2%80%93%2024th%20Dec%202026)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2027 DATES -->
+          <div class="batch-year-card">
+            <div class="year-badge">2027 Dates · Dharamsala</div>
+            <div class="batch-list">
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Jan – 24th Jan 2027</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Jan – 24th Jan 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Jan%20%E2%80%93%2024th%20Jan%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Feb – 24th Feb 2027</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Feb – 24th Feb 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Feb%20%E2%80%93%2024th%20Feb%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Mar – 24th Mar 2027</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Mar – 24th Mar 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Mar%20%E2%80%93%2024th%20Mar%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Apr – 24th Apr 2027</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Apr – 24th Apr 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Apr%20%E2%80%93%2024th%20Apr%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st May – 24th May 2027</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st May – 24th May 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20May%20%E2%80%93%2024th%20May%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Jun – 24th Jun 2027</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Jun – 24th Jun 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Jun%20%E2%80%93%2024th%20Jun%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Jul – 24th Jul 2027</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Jul – 24th Jul 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Jul%20%E2%80%93%2024th%20Jul%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Aug – 24th Aug 2027</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Aug – 24th Aug 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Aug%20%E2%80%93%2024th%20Aug%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Sep – 24th Sep 2027</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Sep – 24th Sep 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Sep%20%E2%80%93%2024th%20Sep%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Oct – 24th Oct 2027</strong>
+                  <span>Upper Dharamsala · 24 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('200-Hour YTTC', '', '1st Oct – 24th Oct 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20200-Hour%20YTTC%20batch%20(1st%20Oct%20%E2%80%93%2024th%20Oct%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="pgrid hidden" id="p300">
-      <div class="prcard">
-        <h4>Air / Sun / Moon Room</h4><small>Single Occupancy</small>
-        <div class="orig">$2,690</div><div class="disc">$1,748.50 <span>Early Bird</span></div>
-        <ul><li>✦ 35 days accommodation</li><li>✦ All homely veg meals</li><li>✦ Full 300-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Advanced materials</li></ul>
-        <div class="card-actions">
-          <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', 'Air / Sun / Moon Room')" class="btn-primary sm">Reserve Spot</a>
-          <a href="https://wa.me/919418100803?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20300-Hour%20YTTC%20-%20Air%20%2F%20Sun%20%2F%20Moon%20Room%20package." target="_blank" class="btn-wa sm">💬 WhatsApp</a>
+
+    <!-- 300 PLAN -->
+    <div id="p300" class="plan-panel hidden">
+      <div class="pgrid">
+        <div class="prcard">
+          <h4>Air / Sun / Moon Room</h4><small class="room-sub">Single Occupancy (Air 1, 2, 3 · Sun · Moon)</small>
+          <div class="disc">$2,690</div>
+          <span class="price-note">All-Inclusive · No Hidden Fees</span>
+          <ul>
+            <li>✦ 35 Days Advanced TTC Retreat</li>
+            <li>✦ Private handcrafted room accommodation</li>
+            <li>✦ Wholesome Indian vegetarian &amp; Ayurvedic meals</li>
+            <li>✦ Full 300-hr curriculum &amp; master adjustments</li>
+            <li>✦ Yoga Alliance RYS 300 certification</li>
+            <li>✦ Advanced study manuals &amp; materials</li>
+          </ul>
+          <div class="card-actions">
+            <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', 'Air / Sun / Moon Room')" class="btn-primary sm">Reserve Spot</a>
+            <a href="https://wa.me/918894787858?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20300-Hour%20YTTC%20-%20Air%20%2F%20Sun%20%2F%20Moon%20Room%20package." target="_blank" rel="noopener noreferrer" class="btn-wa sm">💬 WhatsApp</a>
+          </div>
+        </div>
+        <div class="prcard best">
+          <div class="bestbadge">Best for Groups</div>
+          <h4>Star Cottage</h4><small class="room-sub">Suitable for 2–3 People</small>
+          <div class="disc">$4,815</div>
+          <span class="price-note">All-Inclusive for 2–3 Persons</span>
+          <ul>
+            <li>✦ 35 Days Advanced TTC Retreat</li>
+            <li>✦ Spacious private cottage surrounded by nature</li>
+            <li>✦ Wholesome Indian vegetarian &amp; Ayurvedic meals</li>
+            <li>✦ Full 300-hr curriculum &amp; master adjustments</li>
+            <li>✦ Yoga Alliance RYS 300 certification</li>
+            <li>✦ Private sit-out area &amp; mountain views</li>
+          </ul>
+          <div class="card-actions">
+            <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', 'Star Cottage')" class="btn-primary sm">Reserve Spot</a>
+            <a href="https://wa.me/918894787858?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20300-Hour%20YTTC%20-%20Star%20Cottage%20package." target="_blank" rel="noopener noreferrer" class="btn-wa sm">💬 WhatsApp</a>
+          </div>
         </div>
       </div>
-      <div class="prcard best">
-        <h4>Star Cottage</h4><small>2–3 People</small>
-        <div class="orig">$4,815</div><div class="disc">$3,129.75 <span>Early Bird</span></div>
-        <ul><li>✦ 35 days private cottage</li><li>✦ All homely veg meals</li><li>✦ Full 300-hr curriculum</li><li>✦ Yoga Alliance certification</li><li>✦ Advanced materials</li><li>✦ Private sit-out area</li></ul>
-        <div class="card-actions">
-          <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', 'Star Cottage')" class="btn-primary sm">Reserve Spot</a>
-          <a href="https://wa.me/919418100803?text=Namaste!%20I%27m%20interested%20in%20enquiring%20about%20the%20300-Hour%20YTTC%20-%20Star%20Cottage%20package." target="_blank" class="btn-wa sm">💬 WhatsApp</a>
+
+      <!-- UPCOMING 300-HOUR BATCH DATES -->
+      <div class="batch-dates-container">
+        <div class="batch-dates-header">
+          <span class="batch-icon">📅</span>
+          <div>
+            <h3>300-Hour YTTC Batch Dates · Dharamsala</h3>
+            <p>Advanced Master Training (Requires 200-Hr certification). Maximum 12 students per intake.</p>
+          </div>
+        </div>
+
+        <div class="batch-years-grid">
+          <!-- 2027 DATES -->
+          <div class="batch-year-card">
+            <div class="year-badge">2027 Dates · Dharamsala</div>
+            <div class="batch-list">
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st Apr – 4th May 2027</strong>
+                  <span>Upper Dharamsala · 34 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', '', '1st Apr – 4th May 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20300-Hour%20YTTC%20batch%20(1st%20Apr%20%E2%80%93%204th%20May%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>1st May – 4th Jun 2027</strong>
+                  <span>Upper Dharamsala · 35 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', '', '1st May – 4th Jun 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20300-Hour%20YTTC%20batch%20(1st%20May%20%E2%80%93%204th%20Jun%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>18th Jun – 12th Jul 2027</strong>
+                  <span>Upper Dharamsala · 25 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', '', '18th Jun – 12th Jul 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20300-Hour%20YTTC%20batch%20(18th%20Jun%20%E2%80%93%2012th%20Jul%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>21st Sep – 25th Oct 2027</strong>
+                  <span>Upper Dharamsala · 35 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', '', '21st Sep – 25th Oct 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20300-Hour%20YTTC%20batch%20(21st%20Sep%20%E2%80%93%2025th%20Oct%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+              <div class="batch-item">
+                <div class="batch-date-info">
+                  <strong>22nd Sep – 26th Oct 2027</strong>
+                  <span>Upper Dharamsala · 35 Days</span>
+                </div>
+                <div class="batch-actions">
+                  <a href="javascript:void(0)" onclick="openEnquiryModal('300-Hour YTTC', '', '22nd Sep – 26th Oct 2027')" class="btn-batch-apply">Reserve</a>
+                  <a href="https://wa.me/918894787858?text=Namaste!%20I%20am%20interested%20in%20the%20300-Hour%20YTTC%20batch%20(22nd%20Sep%20%E2%80%93%2026th%20Oct%202027)%20in%20Dharamsala." target="_blank" rel="noopener noreferrer" class="btn-batch-wa" title="WhatsApp">💬</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </section>
 
 <!-- FAQ -->
@@ -435,6 +702,7 @@
       </div>
     </div>
     <p>📍 Bhagsu Village, Upper Dharamsala, Himachal Pradesh, India</p>
+    <p style="margin-top:0.35rem;"><a href="https://wa.me/918894787858" target="_blank" rel="noopener noreferrer" style="color:var(--gold); text-decoration:none;">📱 WhatsApp / Call: +91 88947 87858</a></p>
     <div class="footer-links">
       <a href="#programs">Programs</a>
       <a href="#instructor">Instructor</a>
@@ -468,7 +736,7 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
     <span>Pricing</span>
   </a>
-  <a href="https://wa.me/919418100803" class="mb-item">
+  <a href="https://wa.me/918894787858" target="_blank" rel="noopener noreferrer" class="mb-item">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.2h.8l2.9 2.9h1.1V8h1.1l2.9 2.9v1.1z"></path></svg>
     <span>Chat</span>
   </a>
@@ -499,6 +767,6 @@
   </div>
 </div>
 
-<script src="script.js?v=12"></script>
+<script src="script.js?v=16"></script>
 </body>
 </html>

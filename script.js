@@ -135,19 +135,27 @@ function setSlide(index) {
 
 /* ===== DISCOVERY FORM BATCH OPTIONS ===== */
 const batches200 = [
-  "1st – 24th March 2026",
-  "1st – 24th April 2026",
-  "1st – 24th May 2026",
-  "1st – 24th June 2026",
-  "1st – 24th July 2026",
-  "1st – 24th September 2026",
-  "1st – 24th October 2026"
+  "1st Oct – 24th Oct 2026",
+  "1st Nov – 24th Nov 2026",
+  "1st Dec – 24th Dec 2026",
+  "1st Jan – 24th Jan 2027",
+  "1st Feb – 24th Feb 2027",
+  "1st Mar – 24th Mar 2027",
+  "1st Apr – 24th Apr 2027",
+  "1st May – 24th May 2027",
+  "1st Jun – 24th Jun 2027",
+  "1st Jul – 24th Jul 2027",
+  "1st Aug – 24th Aug 2027",
+  "1st Sep – 24th Sep 2027",
+  "1st Oct – 24th Oct 2027"
 ];
 
 const batches300 = [
-  "1st May – 4th June 2026",
-  "8th June – 12th July 2026",
-  "21st Sept – 25th Oct 2026"
+  "1st Apr – 4th May 2027",
+  "1st May – 4th Jun 2027",
+  "18th Jun – 12th Jul 2027",
+  "21st Sep – 25th Oct 2027",
+  "22nd Sep – 26th Oct 2027"
 ];
 
 function updateDiscoveryBatches() {
@@ -400,7 +408,7 @@ window.addEventListener('scroll', () => {
 });
 
 /* ===== ENQUIRY MODAL POPUP ===== */
-function openEnquiryModal(program, room) {
+function openEnquiryModal(program, room, batch = '') {
   const modal = document.getElementById('enquiryModal');
   const title = document.getElementById('modalTitle');
   const sub = document.getElementById('modalSub');
@@ -411,14 +419,20 @@ function openEnquiryModal(program, room) {
   
   // Set values
   modalProgInput.value = program;
-  modalRoomInput.value = room;
-  sub.textContent = `${program} · ${room}`;
+  modalRoomInput.value = room || batch || '';
+  
+  const displayDetail = [program, room, batch].filter(Boolean).join(' · ');
+  sub.textContent = displayDetail;
 
   // Set WhatsApp dynamic button link
   const modalWaBtn = document.getElementById('modalWaBtn');
   if (modalWaBtn) {
-    const waText = encodeURIComponent(`Namaste! I'm interested in enquiring about the ${program} - ${room} package.`);
-    modalWaBtn.href = `https://wa.me/919418100803?text=${waText}`;
+    let msg = `Namaste! I'm interested in enquiring about the ${program}`;
+    if (batch) msg += ` for the ${batch} batch`;
+    if (room) msg += ` (${room})`;
+    msg += ` in Dharamsala.`;
+    const waText = encodeURIComponent(msg);
+    modalWaBtn.href = `https://wa.me/918894787858?text=${waText}`;
   }
   
   // Show modal and lock body scroll

@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $client_content .= "Program: $program\n";
             $client_content .= "Name: $name\n";
             $client_content .= "WhatsApp/Phone: $phone\n\n";
-            $client_content .= "If you have any immediate questions, feel free to reply directly to this email or chat with us on WhatsApp at +91 9418100803 (https://wa.me/919418100803).\n\n";
+            $client_content .= "If you have any immediate questions, feel free to reply directly to this email or chat with us on WhatsApp at +91 88947 87858 (https://wa.me/918894787858).\n\n";
             $client_content .= "Warm regards,\n";
             $client_content .= "Yogi Shivam & The HimYog Team\n";
             $client_content .= "https://himyog.com\n";

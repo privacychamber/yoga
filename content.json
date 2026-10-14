@@ -3,5 +3,14 @@
   "rooms": {
     "room1": "rooms.png",
     "room2": "rooms.png"
-  }
+  },
+  "reels": [
+    {
+      "video": "uploads/reel1.mp4",
+      "poster": "practice.png",
+      "tag": "Daily Sadhana",
+      "title": "Sunrise Prana Flow",
+      "caption": "Morning asana & breath alignment in Bhagsu"
+    }
+  ]
 }

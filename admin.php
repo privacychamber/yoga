@@ -147,6 +147,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['admin_logged_in']))
             $content_msg = 'Gallery image deleted successfully!';
         }
     }
+
+    if (isset($_POST['upload_reel'])) {
+        $upload_dir = 'uploads/';
+        if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
+        
+        $title = !empty($_POST['reel_title']) ? trim($_POST['reel_title']) : 'Sacred Sadhana';
+        $tag = !empty($_POST['reel_tag']) ? trim($_POST['reel_tag']) : 'Practice';
+        $caption = !empty($_POST['reel_caption']) ? trim($_POST['reel_caption']) : '';
+        
+        if (isset($_FILES['reel_video']) && $_FILES['reel_video']['error'] == 0) {
+            $ext = strtolower(pathinfo($_FILES['reel_video']['name'], PATHINFO_EXTENSION));
+            $allowed = array('mp4', 'mov', 'webm', 'm4v');
+            if (in_array($ext, $allowed)) {
+                $filename = 'reel_' . time() . '.' . $ext;
+                if (move_uploaded_file($_FILES['reel_video']['tmp_name'], $upload_dir . $filename)) {
+                    if (!isset($content_data['reels']) || !is_array($content_data['reels'])) {
+                        $content_data['reels'] = array();
+                    }
+                    $content_data['reels'][] = array(
+                        'video' => $upload_dir . $filename,
+                        'poster' => 'practice.png',
+                        'title' => $title,
+                        'tag' => $tag,
+                        'caption' => $caption
+                    );
+                    file_put_contents($content_file, json_encode($content_data, JSON_PRETTY_PRINT));
+                    $content_msg = 'Video reel uploaded successfully!';
+                } else {
+                    $content_msg = 'Failed to save video file. Please check folder permissions.';
+                }
+            } else {
+                $content_msg = 'Unsupported video format. Please upload MP4, MOV, or WebM.';
+            }
+        } else {
+            $content_msg = 'No video file selected or upload error occurred.';
+        }
+    }
+
+    if (isset($_POST['delete_reel']) && $_POST['delete_reel'] !== '') {
+        $index = intval($_POST['delete_reel']);
+        if (isset($content_data['reels'][$index])) {
+            if (file_exists($content_data['reels'][$index]['video'])) {
+                unlink($content_data['reels'][$index]['video']);
+            }
+            array_splice($content_data['reels'], $index, 1);
+            file_put_contents($content_file, json_encode($content_data, JSON_PRETTY_PRINT));
+            $content_msg = 'Video reel deleted successfully!';
+        }
+    }
 }
 
 // Read CSV data if logged in
@@ -1349,6 +1398,92 @@ $sourceFooterPercent = $totalLeads > 0 ? round(($sourceFooterCount / $totalLeads
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Reels Manager -->
+        <div class="settings-box" style="grid-column: 1 / -1;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">
+            <div>
+              <h3 style="margin: 0; font-family: 'Cinzel', serif; color: var(--gold);">Video Reels (Sacred Glimpses)</h3>
+              <p style="margin: 4px 0 0 0; font-size: 0.85rem; color: var(--text-dim);">Manage vertical 9:16 Instagram-style reels for the landing page showcase.</p>
+            </div>
+            <span style="font-size: 0.8rem; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold); color: var(--gold); padding: 0.3rem 0.8rem; border-radius: 50px;">
+              <?php echo !empty($content_data['reels']) ? count($content_data['reels']) : 0; ?> Active Reels
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem;">
+            <!-- Upload Form -->
+            <form method="POST" action="admin.php" enctype="multipart/form-data" style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border);">
+              <h4 style="font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold); margin-bottom: 1rem;">Upload New Video Reel</h4>
+              
+              <div class="fg">
+                <label for="reel_video">Video File (MP4, MOV, WebM)</label>
+                <input type="file" name="reel_video" id="reel_video" accept="video/mp4,video/webm,video/quicktime" required>
+                <small style="color: var(--text-mute); font-size: 0.75rem; display: block; margin-top: 4px;">Vertical 9:16 portrait video recommended</small>
+              </div>
+
+              <div class="fg">
+                <label for="reel_title">Reel Title</label>
+                <input type="text" name="reel_title" id="reel_title" placeholder="e.g. Sunrise Prana Flow" required>
+              </div>
+
+              <div class="fg">
+                <label for="reel_tag">Category Tag</label>
+                <input type="text" name="reel_tag" id="reel_tag" placeholder="e.g. Daily Sadhana, Sound Healing, Asana Lab">
+              </div>
+
+              <div class="fg">
+                <label for="reel_caption">Brief Caption</label>
+                <input type="text" name="reel_caption" id="reel_caption" placeholder="e.g. Morning practice in the Himalayan foothills">
+              </div>
+
+              <button type="submit" name="upload_reel" class="btn-login" style="width: 100%; margin-top: 0.5rem;">Upload Video Reel →</button>
+              
+              <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(212, 175, 55, 0.08); border-radius: 8px; border: 1px dashed var(--glass-border);">
+                <small style="color: var(--text-dim); font-size: 0.78rem; line-height: 1.4; display: block;">
+                  💡 <strong>Direct File Option:</strong> You can also simply drop your video file directly into <code>uploads/reel1.mp4</code> and it will play as Reel #1 on the website automatically.
+                </small>
+              </div>
+            </form>
+
+            <!-- Current Reels Preview -->
+            <div>
+              <h4 style="font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold); margin-bottom: 1rem;">Current Published Reels</h4>
+              
+              <?php if (empty($content_data['reels'])): ?>
+                <div style="padding: 2.5rem; text-align: center; border: 1px dashed var(--glass-border); border-radius: 12px; color: var(--text-mute);">
+                  <p style="margin: 0; font-size: 0.9rem;">No dynamic reels uploaded yet via admin.</p>
+                  <small style="display: block; margin-top: 0.5rem; color: var(--text-dim);">Reel #1 is currently pointing to default <code>uploads/reel1.mp4</code>.</small>
+                </div>
+              <?php else: ?>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px;">
+                  <?php foreach ($content_data['reels'] as $r_idx => $reel): ?>
+                    <div style="position: relative; border-radius: 12px; overflow: hidden; background: #000; border: 1px solid var(--glass-border); display: flex; flex-direction: column;">
+                      <div style="position: relative; aspect-ratio: 9/16; background: #000;">
+                        <video src="<?php echo htmlspecialchars($reel['video']); ?>" style="width: 100%; height: 100%; object-fit: cover;" muted playsinline preload="metadata"></video>
+                        <form method="POST" action="admin.php" style="position: absolute; top: 8px; right: 8px; z-index: 5;" onsubmit="return confirm('Delete this video reel?');">
+                          <input type="hidden" name="delete_reel" value="<?php echo $r_idx; ?>">
+                          <button type="submit" style="background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; box-shadow: 0 2px 6px rgba(0,0,0,0.5);">&times;</button>
+                        </form>
+                        <span style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.7); color: var(--gold); font-size: 0.65rem; padding: 2px 8px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.3);">
+                          <?php echo htmlspecialchars(!empty($reel['tag']) ? $reel['tag'] : 'Reel'); ?>
+                        </span>
+                      </div>
+                      <div style="padding: 10px; background: var(--bg-accent);">
+                        <strong style="display: block; font-size: 0.85rem; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                          <?php echo htmlspecialchars($reel['title']); ?>
+                        </strong>
+                        <small style="color: var(--text-mute); font-size: 0.75rem; display: block; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                          <?php echo htmlspecialchars(!empty($reel['caption']) ? $reel['caption'] : $reel['video']); ?>
+                        </small>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+              <?php endif; ?>
             </div>
           </div>
         </div>

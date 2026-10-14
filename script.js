@@ -179,6 +179,7 @@ function updateDiscoveryBatches() {
 document.addEventListener('DOMContentLoaded', () => {
   updateDiscoveryBatches();
   loadDynamicContent();
+  initReels();
 });
 
 /* ===== DYNAMIC CONTENT ===== */
@@ -200,13 +201,40 @@ async function loadDynamicContent() {
       }
     }
     
+    // Update Reels from content.json
+    if (data.reels && Array.isArray(data.reels) && data.reels.length > 0) {
+      data.reels.forEach((r, idx) => {
+        if (currentReelsData[idx]) {
+          currentReelsData[idx] = Object.assign({}, currentReelsData[idx], r);
+        } else {
+          currentReelsData.push(r);
+        }
+        
+        // Update DOM card if it exists
+        const card = document.querySelector(`.reel-card[data-index="${idx}"]`);
+        if (card) {
+          const v = card.querySelector('.reel-video');
+          if (v && r.video) v.src = r.video;
+          if (v && r.poster) v.poster = r.poster;
+          const t = card.querySelector('.reel-title');
+          if (t && r.title) t.textContent = r.title;
+          const d = card.querySelector('.reel-desc');
+          if (d && (r.caption || r.desc)) d.textContent = r.caption || r.desc;
+          const p = card.querySelector('.reel-pill');
+          if (p && r.tag) p.textContent = '✦ ' + r.tag;
+        }
+      });
+    }
+
     // Update Gallery
     if (data.gallery && Array.isArray(data.gallery)) {
+      const gallerySection = document.getElementById('gallery-section');
       const galleryGrid = document.getElementById('gallery-grid');
       if (galleryGrid) {
         if (data.gallery.length === 0) {
-          galleryGrid.innerHTML = '<div class="gallery-empty">No images uploaded yet.</div>';
+          if (gallerySection) gallerySection.style.display = 'none';
         } else {
+          if (gallerySection) gallerySection.style.display = 'block';
           galleryGrid.innerHTML = data.gallery.map(img => `
             <div class="gallery-item" onclick="openLightbox('${img}')">
               <img src="${img}" alt="Ashram Life">
@@ -524,6 +552,292 @@ function submitModalEnquiry(e) {
     btn.textContent = 'Send Reservation Request →';
     btn.disabled = false;
   });
+}
+
+// ==================== VIDEO REELS LOGIC ====================
+let currentReelsData = [
+  {
+    video: "uploads/reel1.mp4",
+    poster: "practice.png",
+    tag: "✦ Daily Sadhana",
+    title: "Sunrise Prana Flow",
+    desc: "Morning asana & breath alignment in Bhagsu"
+  },
+  {
+    video: "uploads/reel2.mp4",
+    poster: "slide2.png",
+    tag: "✦ Pranayama Lab",
+    title: "Himalayan Breathwork",
+    desc: "Awakening vital prana with Yogi Shivam"
+  },
+  {
+    video: "uploads/reel3.mp4",
+    poster: "slide3.png",
+    tag: "✦ Sacred Sound",
+    title: "Evening Satsang & Kirtan",
+    desc: "Chanting, singing bowls & deep meditation"
+  },
+  {
+    video: "uploads/reel4.mp4",
+    poster: "slide4.png",
+    tag: "✦ Ashram Life",
+    title: "Mindful Mountain Living",
+    desc: "Ayurvedic meals & sacred village walks"
+  }
+];
+
+let activeModalReelIndex = 0;
+
+function initReels() {
+  const cards = document.querySelectorAll('.reel-card');
+  if (!cards.length) return;
+
+  cards.forEach((card, index) => {
+    const video = card.querySelector('.reel-video');
+    const fill = card.querySelector('.reel-progress-fill');
+    if (!video) return;
+
+    // Card click toggles play/pause
+    card.addEventListener('click', (e) => {
+      // Don't toggle if clicking audio button or full screen button
+      if (e.target.closest('.reel-audio-btn') || e.target.closest('.reel-view-full')) {
+        return;
+      }
+      toggleReelPlay(card, video);
+    });
+
+    // Update progress bar
+    video.addEventListener('timeupdate', () => {
+      if (video.duration && fill) {
+        const pct = (video.currentTime / video.duration) * 100;
+        fill.style.width = pct + '%';
+      }
+    });
+
+    // On ended
+    video.addEventListener('ended', () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+
+    // Error handling - gracefully keep card interactive if video file not yet present
+    video.addEventListener('error', () => {
+      card.classList.remove('is-playing');
+    });
+  });
+
+  // Autoplay/Pause observer for performance
+  if ('IntersectionObserver' in window) {
+    const reelObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const card = entry.target;
+        const video = card.querySelector('.reel-video');
+        if (!video) return;
+
+        if (entry.isIntersecting) {
+          // Attempt muted playback if in view
+          video.muted = true;
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              card.classList.add('is-playing');
+            }).catch(() => {
+              card.classList.remove('is-playing');
+            });
+          }
+        } else {
+          // Pause when leaving view
+          video.pause();
+          card.classList.remove('is-playing');
+        }
+      });
+    }, { threshold: 0.45 });
+
+    cards.forEach(card => reelObserver.observe(card));
+  }
+}
+
+function toggleReelPlay(card, video) {
+  if (video.paused) {
+    // Pause other inline videos first
+    document.querySelectorAll('.reel-card .reel-video').forEach(v => {
+      if (v !== video) {
+        v.pause();
+        const parent = v.closest('.reel-card');
+        if (parent) parent.classList.remove('is-playing');
+      }
+    });
+
+    video.play().then(() => {
+      card.classList.add('is-playing');
+    }).catch(err => {
+      console.log("Reel video play prevented or file not present:", err);
+      const isCard0 = card.dataset.index === "0";
+      if (isCard0) {
+        showReelToast("💡 Drop your video into uploads/reel1.mp4 or upload via Admin!");
+      }
+    });
+  } else {
+    video.pause();
+    card.classList.remove('is-playing');
+  }
+}
+
+function toggleReelAudio(btn, e) {
+  e.stopPropagation();
+  const card = btn.closest('.reel-card');
+  if (!card) return;
+  const video = card.querySelector('.reel-video');
+  if (!video) return;
+
+  const isMuted = video.muted;
+  
+  if (isMuted) {
+    document.querySelectorAll('.reel-card .reel-video').forEach(v => {
+      v.muted = true;
+      const b = v.closest('.reel-card')?.querySelector('.reel-audio-btn');
+      if (b) updateAudioBtnState(b, true);
+    });
+    video.muted = false;
+    updateAudioBtnState(btn, false);
+    if (video.paused) {
+      video.play().then(() => card.classList.add('is-playing')).catch(() => {});
+    }
+  } else {
+    video.muted = true;
+    updateAudioBtnState(btn, true);
+  }
+}
+
+function updateAudioBtnState(btn, isMuted) {
+  const iconMuted = btn.querySelector('.audio-icon-muted');
+  const iconUnmuted = btn.querySelector('.audio-icon-unmuted');
+  if (iconMuted && iconUnmuted) {
+    if (isMuted) {
+      iconMuted.style.display = 'block';
+      iconUnmuted.style.display = 'none';
+      btn.style.background = 'rgba(8, 10, 18, 0.75)';
+      btn.style.color = '#FFFFFF';
+    } else {
+      iconMuted.style.display = 'none';
+      iconUnmuted.style.display = 'block';
+      btn.style.background = 'var(--gold)';
+      btn.style.color = '#080A12';
+    }
+  }
+}
+
+function openReelModal(index, e) {
+  if (e) e.stopPropagation();
+  activeModalReelIndex = index;
+  
+  // Pause all inline videos
+  document.querySelectorAll('.reel-card .reel-video').forEach(v => {
+    v.pause();
+    v.closest('.reel-card')?.classList.remove('is-playing');
+  });
+
+  const modal = document.getElementById('reelModal');
+  const modalVideo = document.getElementById('reelModalVideo');
+  const modalTag = document.getElementById('modalReelTag');
+  const modalTitle = document.getElementById('modalReelTitle');
+  const modalDesc = document.getElementById('modalReelDesc');
+
+  if (!modal || !modalVideo) return;
+
+  const reel = currentReelsData[index] || currentReelsData[0];
+  modalVideo.src = reel.video;
+  modalVideo.poster = reel.poster || '';
+  modalVideo.muted = false; // with sound in modal
+  
+  if (modalTag) modalTag.textContent = reel.tag;
+  if (modalTitle) modalTitle.textContent = reel.title;
+  if (modalDesc) modalDesc.textContent = reel.desc || reel.caption || '';
+
+  modal.classList.remove('hidden');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  modalVideo.play().catch(err => {
+    console.log("Modal video autoplay caught:", err);
+  });
+}
+
+function closeReelModal(e) {
+  if (e && e.target && (e.target.closest('.reel-modal-video-box') || e.target.closest('.reel-modal-details'))) {
+    return;
+  }
+  const modal = document.getElementById('reelModal');
+  const modalVideo = document.getElementById('reelModalVideo');
+  if (modalVideo) {
+    modalVideo.pause();
+    modalVideo.currentTime = 0;
+  }
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.style.display = 'none';
+  }
+  document.body.style.overflow = '';
+}
+
+function prevReelModal(e) {
+  if (e) e.stopPropagation();
+  activeModalReelIndex = (activeModalReelIndex - 1 + currentReelsData.length) % currentReelsData.length;
+  openReelModal(activeModalReelIndex);
+}
+
+function nextReelModal(e) {
+  if (e) e.stopPropagation();
+  activeModalReelIndex = (activeModalReelIndex + 1) % currentReelsData.length;
+  openReelModal(activeModalReelIndex);
+}
+
+// Keyboard shortcuts for modal
+window.addEventListener('keydown', (e) => {
+  const modal = document.getElementById('reelModal');
+  if (modal && !modal.classList.contains('hidden') && modal.style.display !== 'none') {
+    if (e.key === 'Escape') closeReelModal();
+    if (e.key === 'ArrowLeft') prevReelModal();
+    if (e.key === 'ArrowRight') nextReelModal();
+    if (e.key === ' ') {
+      e.preventDefault();
+      const mv = document.getElementById('reelModalVideo');
+      if (mv) {
+        if (mv.paused) mv.play();
+        else mv.pause();
+      }
+    }
+  }
+});
+
+function showReelToast(text) {
+  let toast = document.getElementById('reelToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'reelToast';
+    toast.style.position = 'fixed';
+    toast.style.bottom = '90px';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.backgroundColor = 'rgba(15, 23, 42, 0.96)';
+    toast.style.color = '#FFD700';
+    toast.style.border = '1px solid #D4AF37';
+    toast.style.padding = '12px 24px';
+    toast.style.borderRadius = '50px';
+    toast.style.fontFamily = 'Jost, sans-serif';
+    toast.style.fontSize = '0.9rem';
+    toast.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
+    toast.style.zIndex = '10001';
+    toast.style.transition = 'opacity 0.3s ease';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = text;
+  toast.style.opacity = '1';
+  toast.style.display = 'block';
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    setTimeout(() => { toast.style.display = 'none'; }, 300);
+  }, 4500);
 }
 
 
